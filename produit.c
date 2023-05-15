@@ -151,7 +151,7 @@ void recherche_stock_produit(produit *p1, int nbr_produit){
                 printf("Aucun produit n'a été trouvé avec le nom %s \n", nom);
             }
         }
-        break;
+            break;
         default:
             printf("Entrez un chiffre correcte \n");
             break;

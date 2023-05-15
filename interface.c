@@ -3,11 +3,11 @@
 #define NOMBRE_MAX_CLIENT 30
 
 
-void affiche_mode_achat(void){
+void affiche_mode_achat(){
 
 }
 
-void affiche_mode_gestion(void){
+void affiche_mode_gestion(){
     int choix;
     int nb_obj_actuelle = 0;
     printf("\n \n \n Bienvenue à vous dans le mode gesition, tout d'abord voici la liste de nos produits avec les stocks les + bas : \n \n ");
