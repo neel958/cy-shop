@@ -21,15 +21,14 @@ typedef struct {
 typedef struct {
     char nom[50];
     char prenom[50];
-    produit historique_achats[sizeof(produit)*10];
+    produit historique_achats[sizeof(produit) * 10];
 } client;
 
 
 // declaration des tableaux :
 
-produit object[sizeof(produit) * NOMBRE_MAX_OBJET];
-client user[sizeof(client)*5];
-
+client * user[sizeof(client) * NOMBRE_MAX_CLIENT];
+produit * object[sizeof(produit) * NOMBRE_MAX_OBJET];
 
 // fonction produit :
 
