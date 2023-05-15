@@ -1,7 +1,7 @@
 #include "header.h"
 
 // Fonctions pour les produits
-void ecrire_produits(produit produits[], int nombre_produits, char* nom_fichier) {
+void ecrire_produits(produit produits[], int nombre_produits, char* nom_fichier){
     FILE* fichier = fopen(nom_fichier, "wb");
     if (fichier == NULL) {
         printf("Erreur d'ouverture du fichier %s\n", nom_fichier);

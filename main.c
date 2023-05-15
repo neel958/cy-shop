@@ -3,7 +3,7 @@
 
 int main(){
 
-    afficher_interface();    
+    affiche_mode_achat();
 
     return 0;
 }

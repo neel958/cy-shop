@@ -16,7 +16,7 @@ client ajouter_client(client c1){
 
 void modifier_client(client *c1, int nbr_client, char nom[50]){
     int index_client = -1;
-
+    
 
     for (int i = 0; i < nbr_client; i++) {
         if (c1[i].nom == nom) {
@@ -76,4 +76,17 @@ void supprimer_client(client * c1, int *nombre_clients, char nom[50]){
     (*nombre_clients)--;
 
     printf("Monsieur %s a été supprimé de la base de donnee avec succès.\n", nom);
+}
+
+int rechercher_client(client *c1, char nom[], char prenom[]){
+    int valeur = -1;
+    for (int i = 0; i < 50; i++) {
+        if (strcmp(c1[i].nom, nom) == 0 && strcmp(c1[i].prenom, prenom) == 0) {
+            return i;
+        }
+    }
+    if (valeur == -1) {
+        printf("Nous n'avons pas trouvé de %s %s.\n", prenom, nom);
+        return -1;
+    }
 }

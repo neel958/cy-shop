@@ -113,25 +113,25 @@ int supprimer_produit(produit *produits, int *nombre_produits, unsigned long ref
     printf("Le produit avec la référence %lu a été supprimé avec succès.\n", reference);
     return t;
 }
-void recherche_produit(produit *p1, int nbr_produit) {
+void recherche_stock_produit(produit *p1, int nbr_produit){
     int choix;
-    printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la référence\nTapez 2 pour le chercher par le nom\n\n");
+    printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la référence \nTapez 2 pour le chercher par le nom\n\n");
     scanf("%d", &choix);
     switch (choix) {
         case 1: {
             int valeur = -1;
             unsigned long ref;
-            printf("Indiquez la référence du produit que vous recherchez : ");
+            printf("Indiquez la référence du produit dont vous souhaitez connaitre le stock : ");
             scanf("%lu", &ref);
             for (int i = 0; i < nbr_produit; i++) {
                 if (p1[i].reference == ref) {
-                    affiche_produit(&p1[i]);
+                    printf("%d \n", p1[i].quantite);
                     valeur = i;
                     break;
                 }
             }
             if (valeur == -1) {
-                printf("Aucun produit n'a été trouvé avec la référence %lu.\n", ref);
+                printf("Aucun produit n'a été trouvé avec la référence %lu \n", ref);
             }
         }
         break;
@@ -142,18 +142,18 @@ void recherche_produit(produit *p1, int nbr_produit) {
             scanf("%s", nom);
             for (int i = 0; i < nbr_produit; i++) {
                 if (strcmp(p1[i].nom, nom) == 0) {
-                    affiche_produit(&p1[i]);
+                    printf("%d \n", p1[i].quantite);
                     valeur = i;
                     break;
                 }
             }
             if (valeur == -1) {
-                printf("Aucun produit n'a été trouvé avec le nom %s.\n", nom);
+                printf("Aucun produit n'a été trouvé avec le nom %s \n", nom);
             }
         }
         break;
         default:
-            printf("Entrez un chiffre correcte. \n");
+            printf("Entrez un chiffre correcte \n");
             break;
     }
 }
@@ -161,7 +161,7 @@ void recherche_produit(produit *p1, int nbr_produit) {
 
 void affiche_stock_bas(produit * p1, int nombre_produit){
     for(int i = 0 ; i < nombre_produit ; i ++){
-        if(p1[i].quantite ==0){
+        if(p1[i].quantite == 0){
             printf("Nous ne possedons plus de %s \n",p1[i].nom);
         }
     }
@@ -195,7 +195,7 @@ void afficher_tout_produits(produit *p1, int nombre_produit) {
 }
 
 void afficher_place_restante(produit produits[], int nombre_produits) {
-    int place_totale = 150;
+    int place_totale = 300;
     int place_occupee = 0;
 
     for (int i = 0; i < nombre_produits; i++) {
