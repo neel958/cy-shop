@@ -4,7 +4,67 @@
 
 
 void affiche_mode_achat(){
+    int choix;
+    float prix_total = 0 ;
+    printf("Avez vous un compte client ? \n1 pour oui \n2 pour non \n");
+    scanf("%d", &choix);
+    switch (choix)
+    {
+    case 1:
+        char nom[50];
+        char prenom[50];
+        printf("Quelle est votre nom et prenom ? \n");
+        scanf("%s", &nom);
+        scanf("%s", &prenom);
+        rechercher_client(&user, nom, prenom);
+        afficher_3_derniers_achats(&user);
+        break;
+    case 2:
+        int numero_client = 0;
+        printf("Nous allons vous créer un compte client \n");
+        user[numero_client] = ajouter_client(user);
+        numero_client ++;
+        break;
+    default:
+        break;
+    }
+    choix = 0;
+    do
+    {
+        printf("Tapez 1 pour rechercher un produit et l'acheter \n");
+        print("Tapez 2 pour afficher le prix total \n");
+        scanf("%d", &choix);
+        switch (choix)
+        {
+        case 1:
+            int choix2 = 0 ;
+            produit p1 = recherche_produit(object, NOMBRE_MAX_OBJET);
+            printf("Voulez vous acheter le produit suivant : %s ?\n", p1.nom);
+            printf("Tapez 1 pour oui, 2 pour non \n");
+            switch (choix2)
+            {
+            case 1:
+                p1.quantite--;
+                prix_total += p1.prix;
+                break;
+            case 2:
+                break;
+            default:
+                printf("Vous n'avez ni rentrer 1 ni 2 \n");
+                break;
+            }
+            break;
+        case 2:
+            int oui_non;
+            printf("Voici le prix total de vos achats pour l'instant : %.2f\n", prix_total);
 
+            break;
+        default:
+            printf("Vous n'avez pas rentré de nombre correct \n");
+            break;
+        }
+    } while (choix != 4);
+    
 }
 
 void affiche_mode_gestion(){
