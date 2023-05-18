@@ -2,7 +2,6 @@
 
 
 
-
 void affiche_produit(produit* p1){
     printf("Voici les caracteristiques du produit : \n");
     printf("Nom : %s \n", p1->nom);
@@ -114,7 +113,9 @@ int supprimer_produit(produit *produits, int *nombre_produits, unsigned long ref
     return t;
 }
 
-produit recherche_produit(produit *p1, int nbr_produit){
+
+produit trouver_produit(produit *p1, int nbr_produit){
+    produit produit_poubelle;
     int choix;
     printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la référence \nTapez 2 pour le chercher par le nom\n\n");
     scanf("%d", &choix);
@@ -128,7 +129,6 @@ produit recherche_produit(produit *p1, int nbr_produit){
                 if (p1[i].reference == ref) {
                     valeur = i;
                     return p1[i];
-                    break;
                 }
             }
             if (valeur == -1) {
@@ -145,7 +145,6 @@ produit recherche_produit(produit *p1, int nbr_produit){
                 if (strcmp(p1[i].nom, nom) == 0) {
                     valeur = i;
                     return p1[i];
-                    break;
                 }
             }
             if (valeur == -1) {
@@ -157,7 +156,10 @@ produit recherche_produit(produit *p1, int nbr_produit){
             printf("Entrez un chiffre correcte \n");
             break;
     }
+
+    return produit_poubelle;
 }
+
 
 void recherche_stock_produit(produit *p1, int nbr_produit){
     int choix;

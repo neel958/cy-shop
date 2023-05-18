@@ -8,7 +8,7 @@
 
 #define TAILLE_MAX 300
 #define NOMBRE_MAX_OBJET 175
-#define NOMBRE_MAX_CLIENT 7
+#define NOMBRE_MAX_CLIENT 10
 
 typedef struct {
     char nom[50];
@@ -21,14 +21,14 @@ typedef struct {
 typedef struct {
     char nom[50];
     char prenom[50];
-    produit historique_achats[sizeof(produit) * 5];
+    produit historique_achats[sizeof(produit) * 10];
 } client;
-
 
 // declaration des tableaux :
 
-client  user[sizeof(client) * NOMBRE_MAX_CLIENT];
-produit  object[sizeof(produit) * NOMBRE_MAX_OBJET];
+extern client * user;
+extern produit * object;
+
 
 // fonction produit :
 
@@ -41,12 +41,13 @@ void affiche_stock_bas(produit * p1, int nombre_produit);
 void afficher_tout_produits(produit *p1, int nombre_produit);
 void afficher_place_restante(produit produits[], int nombre_produits);
 void augmenter_stock(produit *produits, int nombre_produits, unsigned long reference);
-produit recherche_produit(produit *p1, int nbr_produit);
+produit trouver_produit(produit *p1, int nbr_produit);
+
 
 
 // fonction client :
 
-client ajouter_client(client *c1);
+client ajouter_client(client c1);
 void modifier_client(client *c1, int nbr_client, char nom[50]);
 void supprimer_client(client * c1, int *nombre_clients, char nom[50]);
 int rechercher_client(client *c1, char nom[], char prenom[]);

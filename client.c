@@ -2,16 +2,15 @@
 
 
 
-client ajouter_client(client * c1){
+client ajouter_client(client c1){
     
     printf("Quel est votre nom ? \n");
-    scanf("%s", c1->nom);
+    scanf("%s", c1.nom);
 
     printf("Quel est votre prenom ? \n");
-    scanf("%s", c1->prenom);
+    scanf("%s", c1.prenom);
 
-    
-    return *c1;
+    return c1;
 }
 
 void modifier_client(client *c1, int nbr_client, char nom[50]){
