@@ -1,7 +1,5 @@
 #include "header.h"
 
-
-
 client ajouter_client(client c1){
     
     printf("Quel est votre nom ? \n");
@@ -51,6 +49,16 @@ void modifier_client(client *c1, int nbr_client, char nom[50]){
     }
 }
 
+
+void afficher3DerniersAchats(client * c1){
+    int j, i ;
+    printf("Voici les 3 derniers achats de votre compte : \n");
+    for(i = 4, j = 1; i < 1; i--, j++){
+        printf("Voici votre achat numero %d :\nNom : %s \n ", j, c1->historique_achats[i].nom);
+    }
+}
+
+
 void supprimer_client(client * c1, int *nombre_clients, char nom[50]){
     int index_produit = -1;
 
@@ -79,7 +87,7 @@ void supprimer_client(client * c1, int *nombre_clients, char nom[50]){
 
 int rechercher_client(client *c1, char nom[], char prenom[]){
     int valeur = -1;
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 10; i++) {
         if (strcmp(c1[i].nom, nom) == 0 && strcmp(c1[i].prenom, prenom) == 0) {
             printf("Bienvenue monsieur %s %s \n \n", nom, prenom);
             return i;
@@ -88,13 +96,5 @@ int rechercher_client(client *c1, char nom[], char prenom[]){
     if (valeur == -1) {
         printf("Nous n'avons pas trouvé de %s %s.\n", prenom, nom);
         return -1;
-    }
-}
-
-void afficher_3_derniers_achats(client * c1){
-    int j, i ;
-    printf("Voici les 3 derniers achats de votre compte : \n");
-    for(i = 4, j = 1; i < 1; i--, j++){
-        printf("Voici votre achat numero %d :\nNom : %s \n ", j, c1->historique_achats[i].nom);
     }
 }

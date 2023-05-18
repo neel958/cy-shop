@@ -1,14 +1,30 @@
 #include "header.h"
-#define NOMBRE_MAX_OBJET 175
-#define NOMBRE_MAX_CLIENT 10
 
+
+produit * object = NULL;
+client * user = NULL;
 
 int main(){
-    produit * object = malloc(sizeof(produit) * NOMBRE_MAX_OBJET);
-    client * user = malloc(sizeof(client) * NOMBRE_MAX_CLIENT);
+    FILE* f_produit = fopen("produit.txt", "r");
+     if (f_produit == NULL) {
+        printf("Erreur d'ouverture du fichier \n");
+        return 0;
+    }
 
+    FILE* f_client = fopen("client.txt", "wb");
+    if (f_client == NULL) {
+        printf("Erreur d'ouverture du fichier \n");
+        return 0;
+    }
+
+    ecrireadmin();
+
+    malloc(sizeof(produit) * nbrL(f_produit));
+    malloc(sizeof(client) * nbrL(f_client));
+    
+    ecrireadmin();
     int choix;
-    printf("Bienvenue dans notre magasin CY shop, souhaitez vous allez dans le mode achat ou le mode gestion ? \nTapez 1 pour le mode achat, et 2 pour le mode gestion \n\n");
+    affiche_message_entre();
     scanf("%d",&choix);
     switch (choix)
     {
@@ -16,12 +32,11 @@ int main(){
         affiche_mode_achat();
         break;
     case 2:
-        affiche_mode_gestion();
+        afficheModeGestion();
         break;
     default:
-    printf("Vous n'avez pas entrer un chiffre correct \n.");
+        affiche_default();
         break;
     }
-
     return 0;
 }

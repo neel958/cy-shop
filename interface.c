@@ -1,12 +1,13 @@
 #include "header.h"
 
-#define NOMBRE_MAX_OBJET 175
 
-produit trouver_produit(produit *p1, int nbr_produit);
+
 
 void affiche_mode_achat(){
-    int choix;
+    
+    int choix, choix1;
     float prix_total = 0 ;
+    int numero_client = 1;
     printf("\nAvez vous un compte client ? \n1 pour oui \n2 pour non \n");
     scanf("%d", &choix);
     switch (choix)
@@ -17,35 +18,36 @@ void affiche_mode_achat(){
         char nom[50];
         char prenom[50];
         printf("\nQuelle est votre nom et prenom ? \n");
-        scanf("%s", &nom);
-        scanf("%s", &prenom);
+        scanf("%s", nom);
+        scanf("%s", prenom);
         var = rechercher_client(user, nom, prenom);
         if(var!=-1){
-        afficher_3_derniers_achats(user);        
+        afficher3DerniersAchats(user);
         }
 
         break;
     }
     case 2:
-    {
-        int numero_client = 0;
         printf("\nNous allons vous créer un compte client \n");
         user[numero_client] = ajouter_client(user[numero_client]);
         numero_client ++;
         break;
-    }
+
     default:
+        printf("Vous n'avez pas rentré de chiffre correct \n");
+        return;
         break;
     }
-    choix = 0;
+    choix1 = 0;
     do
     {
         printf("\nTapez 1 pour rechercher un produit et l'acheter \n");
         printf("Tapez 2 pour afficher le prix total \n");
         printf("Tapez 3 pour basculer vers le mode gestion \n");
-        printf("Tapez 4 pour quitter l'interface \n");
-        scanf("%d", &choix);
-        switch (choix)
+        printf("Tapez 4 pour ajouter un client à la liste \n");
+        printf("Tapez 5 pour quitter l'interface \n");
+        scanf("%d", &choix1);
+        switch (choix1)
         {
         case 1:
         {
@@ -67,32 +69,43 @@ void affiche_mode_achat(){
                 break;
             }
             break;
+        }
         case 2:
         {
             int oui_non;
             printf("\nVoici le prix total de vos achats pour l'instant : %.2f\n", prix_total);
 
             break;
+        
         }
-
         case 3:
-            affiche_mode_gestion();
+        
+            afficheModeGestion();
             break;
+        
         case 4: 
+            if(numero_client > NOMBRE_MAX_CLIENT){
+                printf("Vous avez dépassé la limite maximal d'utilisateur \n");
+            }
+            else{
+                user[numero_client] = ajouter_client(user[numero_client]);
+                numero_client ++;
+
+            }
+            break;
+        case 5:
             break;
         default:
             printf("Vous n'avez pas rentré de nombre correct \n");
             break;
         }
-        }
-    } while (choix != 4);
-    
+    } while (choix != 5);
 }
 
-void affiche_mode_gestion(){
-    int choix;
+void afficheModeGestion(){
+    int choix = 0;
     int nb_obj_actuelle = 0;
-    printf("\n \n \n Bienvenue à vous dans le mode gesition, tout d'abord voici la liste de nos produits avec les stocks les + bas : \n \n ");
+    printf("\n \nBienvenue à vous dans le mode gesition, tout d'abord voici la liste de nos produits avec les stocks les + bas : \n \n ");
     affiche_stock_bas(object,nb_obj_actuelle);
     afficher_place_restante(object, nb_obj_actuelle);
     do
@@ -129,3 +142,10 @@ void affiche_mode_gestion(){
     
 }
 
+void affiche_default(){
+    printf("Vous n'avez pas entrer un chiffre correct \n.");
+}
+
+void affiche_message_entre(){
+    printf("Bienvenue dans notre magasin CY shop, souhaitez vous allez dans le mode achat ou le mode gestion ? \nTapez 1 pour le mode achat, et 2 pour le mode gestion \n\n");
+}

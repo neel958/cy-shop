@@ -1,6 +1,5 @@
 #include "header.h"
 
-// Fonctions pour les produits
 void ecrire_produits(produit produits[], int nombre_produits, char* nom_fichier){
     FILE* fichier = fopen(nom_fichier, "wb");
     if (fichier == NULL) {
@@ -12,6 +11,42 @@ void ecrire_produits(produit produits[], int nombre_produits, char* nom_fichier)
         fwrite(&produits[i], sizeof(produit), 1, fichier);
     }
     fclose(fichier);
+}
+
+
+int nbrL(FILE *file){
+
+    int i = 0 ;
+    char c;
+
+    while ((c=getc(file))!=EOF){
+
+        if (c=='\n'){
+            i++;
+        }
+    }
+
+    rewind(file);
+    return i+1;
+}
+
+
+int stockAccount(client * c1){
+
+    FILE *acc = fopen("client.txt","r");
+    if(acc == NULL){
+    acc = fopen("./Data/Account-save.txt","r");
+    }
+
+    int nbrl =nbrL(acc);
+
+    for(int i=0;i<nbrl;i++){
+
+        fscanf(acc,"%s %s",c1[i].nom,c1[i].prenom);
+    }
+
+    fclose(acc);
+    return nbrl;
 }
 
 int lire_produits(produit produits[], char* nom_fichier) {
@@ -30,18 +65,27 @@ int lire_produits(produit produits[], char* nom_fichier) {
 }
 
 
-// Fonctions pour les clients
-void ecrire_client(const char *fichier, client *Client) {
-    FILE *f = fopen(fichier, "wb");
+void ecrireadmin(){
+    FILE *f = fopen("client.txt", "wb");
     if (f == NULL) {
-        printf("Erreur lors de l'ouverture du fichier %s\n", fichier);
+        printf("Erreur lors de l'ouverture du fichier \n");
         return;
     }
 
-    fwrite(Client, sizeof(Client), 1, f);
+    char admin[20] = "Ahmed Naël";
+    fputs(admin, f);
     fclose(f);
 }
 
+void ecrire_client(const char* nom, const char* prenom){
+    FILE *f = fopen("client.txt", "wb");
+    if (f == NULL) {
+        printf("Erreur lors de l'ouverture du fichier \n");
+        return;
+    }
+    fprintf(f, "%s %s\n", nom, prenom);
+    fclose(f);
+}
 int lire_client(const char *fichier, client *Client) {
     FILE *f = fopen(fichier, "rb");
     if (f == NULL) {

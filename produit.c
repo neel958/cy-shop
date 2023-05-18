@@ -1,7 +1,6 @@
 #include "header.h"
 
 
-
 void affiche_produit(produit* p1){
     printf("Voici les caracteristiques du produit : \n");
     printf("Nom : %s \n", p1->nom);
@@ -156,10 +155,18 @@ produit trouver_produit(produit *p1, int nbr_produit){
             printf("Entrez un chiffre correcte \n");
             break;
     }
-
-    return produit_poubelle;
 }
 
+void afficher_tout_produits(produit *p1, int nombre_produit) {
+    for (int i = 0; i < nombre_produit; i++) {
+        printf("Voici les caracteristiques du produit numero %d : \n", i + 1);
+        printf("Nom : %s \n", p1[i].nom);
+        printf("Numero de reference : %lu \n", p1[i].reference);
+        printf("Quantite : %d \n", p1[i].quantite);
+        printf("Prix : %.2f \n", p1[i].prix);
+        printf("Taille : %c \n", p1[i].taille);
+    }
+}
 
 void recherche_stock_produit(produit *p1, int nbr_produit){
     int choix;
@@ -231,16 +238,6 @@ void affiche_stock_bas(produit * p1, int nombre_produit){
     }
 }
 
-void afficher_tout_produits(produit *p1, int nombre_produit) {
-    for (int i = 0; i < nombre_produit; i++) {
-        printf("Voici les caracteristiques du produit numero %d : \n", i + 1);
-        printf("Nom : %s \n", p1[i].nom);
-        printf("Numero de reference : %lu \n", p1[i].reference);
-        printf("Quantite : %d \n", p1[i].quantite);
-        printf("Prix : %.2f \n", p1[i].prix);
-        printf("Taille : %c \n", p1[i].taille);
-    }
-}
 
 void afficher_place_restante(produit produits[], int nombre_produits) {
     int place_totale = 300;
@@ -263,7 +260,7 @@ void afficher_place_restante(produit produits[], int nombre_produits) {
     printf("Il reste %d places disponibles.\n", place_restante);
 }
 
-void augmenter_stock(produit *produits, int nombre_produits, unsigned long reference) {
+void augmenter_stock(produit *produits, int nombre_produits, unsigned long reference){
     int index_produit = -1;
     for (int i = 0; i < nombre_produits; i++) {
         if (produits[i].reference == reference) {
