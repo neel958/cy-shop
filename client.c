@@ -86,8 +86,14 @@ void supprimer_client(client * c1, int *nombre_clients, char nom[50]){
 }
 
 int rechercher_client(client *c1, char nom[], char prenom[]){
+    FILE* f_client = fopen("client.txt", "wb");
+    if (f_client == NULL) {
+        printf("Erreur d'ouverture du fichier \n");
+        return 0;
+    }
+
     int valeur = -1;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < nbrL(f_client); i++) {
         if (strcmp(c1[i].nom, nom) == 0 && strcmp(c1[i].prenom, prenom) == 0) {
             printf("Bienvenue monsieur %s %s \n \n", nom, prenom);
             return i;
