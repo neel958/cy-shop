@@ -71,7 +71,7 @@ void supprimer_client(client * c1, int *nombre_clients, char nom[50]){
 
 
     if (index_produit == -1) {
-        printf("Monsieur %s n'a pas été trouvé dans notre base de donnee.\n", nom);
+        printf("Monsieur %s n'a pas ete trouve dans notre base de donnee.\n", nom);
         return;
     }
 
@@ -82,7 +82,7 @@ void supprimer_client(client * c1, int *nombre_clients, char nom[50]){
     // Diminuer le nombre de client
     (*nombre_clients)--;
 
-    printf("Monsieur %s a été supprimé de la base de donnee avec succès.\n", nom);
+    printf("Monsieur %s a été supprime de la base de donnee avec succes.\n", nom);
 }
 
 int rechercher_client(client *c1, char nom[], char prenom[]){
@@ -96,11 +96,12 @@ int rechercher_client(client *c1, char nom[], char prenom[]){
     for (int i = 0; i < nbrL(f_client); i++) {
         if (strcmp(c1[i].nom, nom) == 0 && strcmp(c1[i].prenom, prenom) == 0) {
             printf("Bienvenue monsieur %s %s \n \n", nom, prenom);
-            return i;
+            valeur = i;
+            return valeur;
         }
     }
     if (valeur == -1) {
-        printf("Nous n'avons pas trouvé de %s %s.\n", prenom, nom);
+        printf("Nous n'avons pas trouve de %s %s.\n", prenom, nom);
         return -1;
     }
 }

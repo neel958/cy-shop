@@ -11,7 +11,7 @@ int lire_produits() {
     char ligne[100];
 
     for (int i = 0; i < nbrl; i++) {          
-        fscanf(f, "%s %lu %d %c", object[i].nom, &object[i].reference, &object[i].quantite, &object[i].taille);
+        fscanf(f, "%s %lu %d %c %f", object[i].nom, &object[i].reference, &object[i].quantite, &object[i].taille, &object[i].prix);
         printf("test %d \n", i+1);
 
         
@@ -102,8 +102,8 @@ void ecrireadmins(){
         return;
     }
 
-    char admin[20] = "Ahmed Naël";
-    char admin1[20] = "Khalfane Sélim";
+    char admin[20] = "Ahmed Nael";
+    char admin1[20] = "Khalfane Selim";
     char saut_ligne[2] = "\n";
     fputs(admin, f);
     fputs(saut_ligne, f);
@@ -111,11 +111,17 @@ void ecrireadmins(){
     fclose(f);
 }
 
-void ecrire_client(const char* nom, const char* prenom){
-    printf("test 1\n");
-    FILE *f = fopen("client.txt", "wr");
-    
-    printf("test 2\n");
-    fprintf(f, "%s %s\n", nom, prenom);
+void ecrire_client(char nom [], char prenom[]){
+
+    FILE *f = fopen("client.txt", "a");
+    if (f == NULL) {
+        printf("Erreur lors de l'ouverture du fichier \n");
+        return;
+    }
+    fputs("\n", f);
+    fputs(nom, f);
+    fputs(" ", f);
+    fputs(prenom, f);
+
     fclose(f);
 }

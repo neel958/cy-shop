@@ -49,7 +49,7 @@ void augmenter_stock(produit *produits, int nombre_produits, unsigned long refer
 
 
 int lire_produits();
-void ecrire_client(const char* nom, const char* prenom);
+void ecrire_client(char nom [], char prenom[]);
 int lire_client();
 int nbrL(FILE * file);
 int stockAccount(client * c1);
