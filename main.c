@@ -5,22 +5,16 @@ produit * object = NULL;
 client * user = NULL;
 
 int main(){
-    FILE* f_produit = fopen("produit.txt", "r");
-        if (f_produit == NULL) {
-            erreur_fichier();
-            return 0;
-        }
-
-    FILE* f_client = fopen("client.txt", "wb");
-    if (f_client == NULL) {
-        erreur_fichier();
-        return 0;
-    }
+    FILE * f_c = fichier_client();
+    FILE * f_p = fichier_produit();
 
     ecrireadmins();
 
-    malloc(sizeof(produit) * nbrL(f_produit));
-    malloc(sizeof(client) * nbrL(f_client));
+    object =  malloc(sizeof(produit) * nbrL(f_c));
+    user = malloc(sizeof(client) * nbrL(f_p));
+
+    int nbL_c = lire_client();
+    int nbL_p = lire_produits();
 
     int choix;
     affiche_message_entre();
@@ -37,5 +31,8 @@ int main(){
         affiche_default();
         break;
     }
+
+    free(user);
+    free(object);
     return 0;
 }

@@ -1,5 +1,48 @@
 #include "header.h"
 
+int lire_produits() {
+    FILE *f = fopen("produit.txt", "r");
+    if (f == NULL) {
+        printf("Erreur lors de l'ouverture du fichier produit.txt.\n");
+        return 0; 
+    }
+    
+    int nbrl = nbrL(f);
+    char ligne[100];
+
+    for (int i = 0; i < nbrl; i++) {          
+        fscanf(f, "%s %lu %d %c", object[i].nom, &object[i].reference, &object[i].quantite, &object[i].taille);
+        printf("test %d \n", i+1);
+
+        
+    }
+
+    fclose(f);
+    return nbrl;
+}
+
+int lire_client() {
+
+    FILE *f = fopen("client.txt","r");
+    if (f == NULL) {
+        printf("Erreur lors de l'ouverture du fichier client.txt.\n");
+        return 0;
+    }
+    int nbrl =nbrL(f);
+
+    for (int i = 0; i < nbrl; i++) {
+        if (fscanf(f, "%s %s", user[i].nom, user[i].prenom) != 2) {
+            printf("Erreur de lecture des données du fichier <<client.txt>> a la ligne %d\n", i+1);
+            fclose(f);
+            return 0;
+        }
+    }
+
+    fclose(f);
+    return nbrl;
+}
+
+
 int nbrL(FILE *file){
 
     int i = 0 ;
@@ -16,6 +59,18 @@ int nbrL(FILE *file){
     return i+1;
 }
 
+FILE * fichier_client(){
+    FILE * f = fopen("client.txt","r");
+    if(f == NULL){f = fopen("client.txt","r");}
+    return f;
+}
+
+FILE * fichier_produit(){
+    FILE * f = fopen("produit.txt","r");
+    if(f == NULL){f = fopen("produit.txt","r");}
+    return f;
+}
+
 void erreur_fichier(){
     printf("Erreur lors de l'ouverture du fichier \n");
 }
@@ -24,7 +79,7 @@ int stockAccount(client * c1){
 
     FILE *acc = fopen("client.txt","r");
     if(acc == NULL){
-    acc = fopen("./Data/Account-save.txt","r");
+    acc = fopen("client.txt","r");
     }
 
     int nbrl =nbrL(acc);
@@ -38,20 +93,6 @@ int stockAccount(client * c1){
     return nbrl;
 }
 
-int lire_produits(produit produits[], char* nom_fichier) {
-    FILE* fichier = fopen(nom_fichier, "wr");
-    if (fichier == NULL) {
-        printf("Erreur d'ouverture du fichier %s\n", nom_fichier);
-        return 0;
-    }
-    int nombre_produits;
-    fread(&nombre_produits, sizeof(int), 1, fichier);
-    for (int i = 0; i < nombre_produits; i++) {
-        fread(&produits[i], sizeof(produit), 1, fichier);
-    }
-    fclose(fichier);
-    return nombre_produits;
-}
 
 
 void ecrireadmins(){
@@ -61,31 +102,20 @@ void ecrireadmins(){
         return;
     }
 
-    char admin[20] = "Ahmed Naël \n";
-    char admin1[20] = "Khalfane Sélim \n";
+    char admin[20] = "Ahmed Naël";
+    char admin1[20] = "Khalfane Sélim";
+    char saut_ligne[2] = "\n";
     fputs(admin, f);
+    fputs(saut_ligne, f);
     fputs(admin1, f);
     fclose(f);
 }
 
 void ecrire_client(const char* nom, const char* prenom){
+    printf("test 1\n");
     FILE *f = fopen("client.txt", "wr");
-    if (f == NULL) {
-        printf("Erreur lors de l'ouverture du fichier \n");
-        return;
-    }
+    
+    printf("test 2\n");
     fprintf(f, "%s %s\n", nom, prenom);
     fclose(f);
-}
-int lire_client(const char *fichier, client *Client) {
-    FILE *f = fopen(fichier, "wr");
-    if (f == NULL) {
-        printf("Erreur lors de l'ouverture du fichier %s\n", fichier);
-        return 0;
-    }
-
-    fread(Client, sizeof(Client), 1, f);
-    fclose(f);
-
-    return 1;
 }

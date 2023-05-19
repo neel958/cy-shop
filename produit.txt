@@ -1,7 +1,7 @@
 Pommes 1 5 P
 Bananes 2 5 P
 Oranges 3 5 P
-Tomates 4 5
+Tomates 4 5 P
 Lait 5 5 P
 Pain 6 5 P
 Riz 7 5 P
@@ -11,20 +11,20 @@ Oeufs 10 5 P
 Poulet 11 1 M
 Boeuf 12 2 G
 Saumon 13 5 P
-Thon en conserve 14 5 P
+Thon-en-conserve 14 5 P
 Carottes 15 5 P
 Poivrons 16 5 P
 Concombre 17 5 P
-Pommes de terre 18 5 P
+Pommes-de-terre 18 5 P
 Oignons 19 5 P
 Fromage 20 5 P
 Jambon 21 5 P
 Beurre 22 5 P 
-Huile d'olive 23 2 G
+Huile-d'olive 23 2 G
 Sucre 24 5 M
-Café moulu 25 2 M
+Café-moulu 25 2 M
 Thé 26 1 M
-Jus d'orange 27 5 P
+Jus-d'orange 27 5 P
 Soda 28 5 G
 Chips 29 5 P
 Chocolat 30 5 M
@@ -32,17 +32,17 @@ Biscuits 31 2 M
 Céréales 32 5 M
 Miel 33 2 G
 Confiture 34 2 M
-Pain de mie 35 5 P
+Pain-de-mie 35 5 P
 Salade 36 1 G
 Vinaigrette 37 1 M
-Fruits secs 38 1 M
+Fruits-secs 38 1 M
 Noix 39 5 P
-Céréales pour bébé 40 2 M
-Couches pour bébé 41 1 G
+Céréales-pour-bébé 40 2 M
+Couches-pour-bébé 41 1 G
 Shampooing 42 2 M
 Savon 43 2 M
 Dentifrice 44 5 P
-Papier toilette 45 1 G
+Papier-toilette 45 1 G
 Essuie-tout 46 1 G
 Lessive 47 1 G
 Éponges 48 2 M

@@ -48,13 +48,16 @@ void afficher_place_restante(produit produits[], int nombre_produits);
 void augmenter_stock(produit *produits, int nombre_produits, unsigned long reference);
 
 
-int lire_produits(produit produits[], char* nom_fichier);
+int lire_produits();
 void ecrire_client(const char* nom, const char* prenom);
-int lire_client(const char *fichier, client *Client);
-int nbrL(FILE *file);
+int lire_client();
+int nbrL(FILE * file);
 int stockAccount(client * c1);
 void ecrireadmins();
 void erreur_fichier();
+FILE * fichier_client();
+FILE * fichier_produit();
+
 
 client ajouter_client(client c1);
 void modifier_client(client *c1, int nbr_client, char nom[50]);
