@@ -118,7 +118,7 @@ void ecrire_client(char nom [], char prenom[]){
         printf("Erreur lors de l'ouverture du fichier \n");
         return;
     }
-    fputs("\n", f);
+    fputs("\n",f);
     fputs(nom, f);
     fputs(" ", f);
     fputs(prenom, f);

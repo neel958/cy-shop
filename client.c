@@ -86,7 +86,7 @@ void supprimer_client(client * c1, int *nombre_clients, char nom[50]){
 }
 
 int rechercher_client(client *c1, char nom[], char prenom[]){
-    FILE* f_client = fopen("client.txt", "wb");
+    FILE* f_client = fopen("client.txt", "rb");
     if (f_client == NULL) {
         printf("Erreur d'ouverture du fichier \n");
         return 0;
@@ -101,7 +101,7 @@ int rechercher_client(client *c1, char nom[], char prenom[]){
         }
     }
     if (valeur == -1) {
-        printf("Nous n'avons pas trouve de %s %s.\n", prenom, nom);
+        printf("Nous n'avons pas trouve de %s %s.\n", nom, prenom);
         return -1;
     }
 }

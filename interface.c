@@ -44,6 +44,7 @@ void affiche_mode_achat(){
         break;
     }
     choix1 = 0;
+
     do
     {
         printf("\nTapez 1 pour rechercher un produit et l'acheter \n");
@@ -60,28 +61,41 @@ void affiche_mode_achat(){
             int choix_achat = 0;
             produit p1;
             p1 = trouver_produit(object, NOMBRE_MAX_OBJET);
-            
+            if(p1.quantite == -4){
+                exit(1);
+            }
+            if(p1.quantite == 0){
+                printf("Nous sommes desole mais ce produit est en rupture se stock \n");
+                exit(1);
+            }
+
             printf("\nVoulez vous acheter le produit suivant : %s ?\n", p1.nom);
             printf("Tapez 1 pour oui, 2 pour non \n");
             scanf("%d", &choix_achat);
             switch (choix_achat)
             {
             case 1:       
-                p1.quantite =- 1;
+                p1.quantite -= 1;
                 prix_total += p1.prix;
                 printf("\nVous avez achete le produit avec succes \n");
+                for(int i = 0; i < NOMBRE_MAX_OBJET ; i++){
+                    if(strcmp(object[i].nom,p1.nom)  == 0){
+                        object[i].quantite = p1.quantite;
+                        break;
+                    }
+                }
                 break;
-            case 2:
+            case 2:  
                 break;
             default:
                 printf("Vous n'avez ni rentrer 1 ni 2 \n");
                 break;
             }
+            
             break;
         }
         case 2:
         {
-            int oui_non;
             printf("\nVoici le prix total de vos achats pour l'instant : %.2f € \n", prix_total);
 
             break;
@@ -109,6 +123,8 @@ void affiche_mode_achat(){
             for(int i = 0 ; i < NOMBRE_MAX_OBJET ; i++){
                 printf("Nom du produit : %s / Stock restant : %d / Prix : %.2f euros / Numero de reference : %lu\n",object[i].nom,object[i].quantite,object[i].prix,object[i].reference);
             }
+            break;
+        case 6:
             break;
         default:
             printf("Vous n'avez pas rentré de nombre correct \n");

@@ -115,6 +115,7 @@ int supprimer_produit(produit *produits, int *nombre_produits, unsigned long ref
 
 produit trouver_produit(produit *p1, int nbr_produit){
     produit produit_poubelle;
+    produit_poubelle.quantite = -4;
     int choix;
     printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la reference \nTapez 2 pour le chercher par le nom\n\n");
     scanf("%d", &choix);
@@ -132,6 +133,7 @@ produit trouver_produit(produit *p1, int nbr_produit){
             }
             if (valeur == -1) {
                 printf("Aucun produit n'a ete trouve avec la reference %lu \n", ref);
+                return produit_poubelle;
             }
         }
         break;
@@ -148,6 +150,7 @@ produit trouver_produit(produit *p1, int nbr_produit){
             }
             if (valeur == -1) {
                 printf("Aucun produit n'a ete trouve avec le nom %s \n", nom);
+                return produit_poubelle;
             }
         }
             break;

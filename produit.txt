@@ -1,4 +1,4 @@
-Pommes 1 5 P 1
+Pommes 1 1 P 1
 Bananes 2 5 P 1
 Oranges 3 5 P 1
 Tomates 4 5 P 1
