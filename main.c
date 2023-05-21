@@ -13,8 +13,8 @@ int main(){
     object =  malloc(sizeof(produit) * nbrL(f_c));
     user = malloc(sizeof(client) * nbrL(f_p));
 
-    int nbL_c = lire_client();
-    int nbL_p = lire_produits();
+    lire_client();
+    lire_produits();
 
     int choix;
     affiche_message_entre();

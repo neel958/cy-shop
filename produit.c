@@ -173,17 +173,17 @@ void afficher_tout_produits(produit *p1, int nombre_produit) {
 
 void recherche_stock_produit(produit *p1, int nbr_produit){
     int choix;
-    printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la référence \nTapez 2 pour le chercher par le nom\n\n");
+    printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la reference \nTapez 2 pour le chercher par le nom\n\n");
     scanf("%d", &choix);
     switch (choix) {
         case 1: {
             int valeur = -1;
             unsigned long ref;
-            printf("Indiquez la référence du produit dont vous souhaitez connaitre le stock : ");
+            printf("Indiquez la reference du produit dont vous souhaitez connaitre le stock : ");
             scanf("%lu", &ref);
             for (int i = 0; i < nbr_produit; i++) {
                 if (p1[i].reference == ref) {
-                    printf("%d \n", p1[i].quantite);
+                    printf("Il reste la quantite suivante : %d \n", p1[i].quantite);
                     valeur = i;
                     break;
                 }
@@ -263,10 +263,12 @@ void afficher_place_restante(produit produits[], int nombre_produits) {
     printf("Il reste %d places disponibles.\n", place_restante);
 }
 
-void augmenter_stock(produit *produits, int nombre_produits, unsigned long reference){
+produit augmenter_stock(produit *p1, int nombre_produits, unsigned long reference){
     int index_produit = -1;
+    produit p_poubelle;
+    p_poubelle.reference = -5;
     for (int i = 0; i < nombre_produits; i++) {
-        if (produits[i].reference == reference) {
+        if (p1[i].reference == reference) {
             index_produit = i;
             break;
         }
@@ -274,30 +276,31 @@ void augmenter_stock(produit *produits, int nombre_produits, unsigned long refer
 
     if (index_produit == -1) {
         printf("Le produit avec la référence %lu n'a pas été trouvé.\n", reference);
-        return;
+        return p_poubelle;
     }
 
     int quantite_ajoutee;
-    printf("Combien d'unités voulez-vous ajouter pour le produit %s ?\n", produits[index_produit].nom);
+    printf("Combien d'unités voulez-vous ajouter pour le produit %s ?\n", p1[index_produit].nom);
     scanf("%d", &quantite_ajoutee);
 
     int taille_produit = 0;
-    if (produits[index_produit].taille == 'P') {
+    if (p1[index_produit].taille == 'P') {
         taille_produit = 1;
-    } else if (produits[index_produit].taille == 'M') {
+    } else if (p1[index_produit].taille == 'M') {
         taille_produit = 2;
-    } else if (produits[index_produit].taille == 'G') {
+    } else if (p1[index_produit].taille == 'G') {
         taille_produit = 4;
     }
 
-    int stock_actuel = quantite_ajoutee + produits[index_produit].quantite;
+    int stock_actuel = quantite_ajoutee + p1[index_produit].quantite;
     int taille_stock_actuel = stock_actuel * taille_produit;
 
     if (taille_stock_actuel > TAILLE_MAX) {
         printf("Impossible d'ajouter cette quantité de produit, le stock est plein.\n");
-        return;
+        return p_poubelle;
     }
 
-    produits[index_produit].quantite += quantite_ajoutee;
-    printf("Le stock pour le produit %s a été augmenté de %d unité(s). Nouvelle quantité : %d\n", produits[index_produit].nom, quantite_ajoutee, produits[index_produit].quantite);
+    p1[index_produit].quantite += quantite_ajoutee;
+    printf("Le stock pour le produit %s a été augmenté de %d unité(s). Nouvelle quantité : %d\n", p1[index_produit].nom, quantite_ajoutee, p1[index_produit].quantite);
+    return p1[index_produit];
 }

@@ -59,11 +59,11 @@ void afficher3DerniersAchats(client * c1){
 }
 
 
-void supprimer_client(client * c1, int *nombre_clients, char nom[50]){
+int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]){
     int index_produit = -1;
 
     for (int i = 0; i < *nombre_clients; i++) {
-        if (c1[i].nom == nom) {
+        if (strcmp(c1[i].nom, nom) == 0 && strcmp(c1[i].prenom, prenom) == 0){
             index_produit = i;
             break;
         }
@@ -71,18 +71,18 @@ void supprimer_client(client * c1, int *nombre_clients, char nom[50]){
 
 
     if (index_produit == -1) {
-        printf("Monsieur %s n'a pas ete trouve dans notre base de donnee.\n", nom);
-        return;
+        printf("Monsieur %s %s n'a pas ete trouve dans notre base de donnee.\n", nom, prenom);
+        return -1;
     }
 
     for (int i = index_produit; i < *nombre_clients - 1; i++) {
         c1[i] = c1[i + 1];
     }
 
-    // Diminuer le nombre de client
     (*nombre_clients)--;
 
-    printf("Monsieur %s a été supprime de la base de donnee avec succes.\n", nom);
+    printf("Monsieur %s %s a ete supprime de la base de donnee avec succes.\n", nom, prenom);
+    return index_produit+1;
 }
 
 int rechercher_client(client *c1, char nom[], char prenom[]){

@@ -52,7 +52,8 @@ void affiche_mode_achat(){
         printf("Tapez 3 pour basculer vers le mode gestion \n");
         printf("Tapez 4 pour ajouter un client à la liste \n");
         printf("Tapez 5 pour afficher la liste complete de produit \n");
-        printf("Tapez 6 pour quitter l'interface \n \n");
+        printf("Tapez 6 si vous souhaitez vous desinscrire de notre magasin \n");
+        printf("Tapez 7 pour quitter l'interface \n \n");
         scanf("%d", &choix1);
         switch (choix1)
         {
@@ -125,6 +126,22 @@ void affiche_mode_achat(){
             }
             break;
         case 6:
+        {
+            char nom_supp[25];
+            char prenom_supp [25];
+
+            printf("Entrez votre Nom : \n");
+            scanf("%s", nom_supp);
+            printf("Entrez maintenant votre prenom \n");
+            scanf("%s", prenom_supp);
+            
+            int client_a_supp = supprimer_client(user, &numero_client ,nom_supp, prenom_supp);
+
+            supprimer_ligne_fichier(client_a_supp);
+
+            break;
+        }
+        case 7:
             break;
         default:
             printf("Vous n'avez pas rentré de nombre correct \n");
@@ -135,14 +152,13 @@ void affiche_mode_achat(){
 
 void afficheModeGestion(){
     int choix = 0;
-    int nb_obj_actuelle = 0;
     printf("\n \nBienvenue à vous dans le mode gesition, tout d'abord voici la liste de nos produits avec les stocks les + bas : \n \n ");
-    affiche_stock_bas(object,nb_obj_actuelle);
-    afficher_place_restante(object, nb_obj_actuelle);
+    affiche_stock_bas(object,NOMBRE_MAX_OBJET);
+    afficher_place_restante(object, NOMBRE_MAX_OBJET);
     do
     {
-    printf("\n \n A vous s'offre maintenant plusieurs choix \n");
-    printf("Tappez 1 pour connaître le stock du produit que vous désirez \n");
+    printf("\n \nA vous s'offre maintenant plusieurs choix \n");
+    printf("Tappez 1 pour connaitre le stock du produit que vous desirez \n");
     printf("Tappez 2 pour augmenter le stock d'un produit que vous desirez \n");
     printf("Tappez 3  pour basculer vers le mode achat \n");
     printf("Tappez 4 pour quitter l'interface \n");
@@ -151,18 +167,30 @@ void afficheModeGestion(){
     switch (choix)
     {
     case 1:
-        recherche_stock_produit(object, nb_obj_actuelle);
+        recherche_stock_produit(object, NOMBRE_MAX_OBJET);
         break;
     case 2:
         {
         unsigned long reference;
         printf("Entrez la reference du produit dont vous souhaitez augmenter le stock \n");
         scanf("%lu", &reference);
-        augmenter_stock(object,NOMBRE_MAX_OBJET,reference);
+        produit px = augmenter_stock(object,NOMBRE_MAX_OBJET,reference);
+        if(px.reference==-5){
+            exit(1);
+        }
+        for(int i = 0; i < NOMBRE_MAX_CLIENT ; i++){
+            if(strcmp(object[i].nom,px.nom)  == 0){
+                object[i].quantite = px.quantite;
+                break;
+            }
+        }
+        ecrire_caracteristiques_produits(object, NOMBRE_MAX_OBJET);
         break;
         }
     case 3:
             affiche_mode_achat();
+        break;
+    case 4:
         break;
     default:
         printf("Vous n'avez pas saisi un nombre correct \n");
@@ -178,5 +206,5 @@ void affiche_default(){
 }
 
 void affiche_message_entre(){
-    printf("Bienvenue dans notre magasin CY shop, souhaitez vous allez dans le mode achat ou le mode gestion ? \nTapez 1 pour le mode achat, et 2 pour le mode gestion \n\n");
+    printf("\n \nBienvenue dans notre magasin CY shop, souhaitez vous allez dans le mode achat ou le mode gestion ? \nTapez 1 pour le mode achat, et 2 pour le mode gestion \n\n");
 }

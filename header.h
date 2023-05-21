@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 
 #endif
 
@@ -45,23 +46,24 @@ void recherche_stock_produit(produit *p1, int nbr_produit);
 void affiche_stock_bas(produit * p1, int nombre_produit);
 void afficher_tout_produits(produit *p1, int nombre_produit);
 void afficher_place_restante(produit produits[], int nombre_produits);
-void augmenter_stock(produit *produits, int nombre_produits, unsigned long reference);
+produit augmenter_stock(produit *produits, int nombre_produits, unsigned long reference);
+void ecrire_caracteristiques_produits(produit * p1, int taille);
 
 
-int lire_produits();
+void lire_produits();
 void ecrire_client(char nom [], char prenom[]);
-int lire_client();
+void lire_client();
 int nbrL(FILE * file);
 int stockAccount(client * c1);
 void ecrireadmins();
 void erreur_fichier();
 FILE * fichier_client();
 FILE * fichier_produit();
-
+void supprimer_ligne_fichier(int numero_ligne);
 
 client ajouter_client(client c1);
 void modifier_client(client *c1, int nbr_client, char nom[50]);
-void supprimer_client(client * c1, int *nombre_clients, char nom[50]);
+int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]);
 int rechercher_client(client *c1, char nom[], char prenom[]);
 void afficher3DerniersAchats(client * c1);
 
