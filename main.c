@@ -9,9 +9,8 @@ int main(){
     FILE * f_p = fichier_produit();
     ecrireadmins();
     copier_contenu_fichier();
-
     object =  malloc(sizeof(produit) * nbrL(f_p));
-    user = malloc(sizeof(client) * nbrL(f_c));
+    user = malloc(sizeof(client) * NOMBRE_MAX_CLIENT);
 
     lire_client();
     lire_produits();

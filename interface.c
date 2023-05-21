@@ -31,9 +31,9 @@ void affiche_mode_achat(){
         break;
     }
     case 2:
-        printf("\n\nNous allons vous creer un compte client \n\n");
+        printf("\nNous allons vous creer un compte client \n\n");
         user[numero_client] = ajouter_client(user[numero_client]);
-        printf("Bienvenue %s %s \n \n", user[numero_client].nom, user[numero_client].prenom);
+        printf("Bienvenue %s %s \n\n", user[numero_client].nom, user[numero_client].prenom);
         ecrire_client(user[numero_client].nom, user[numero_client].prenom);
         numero_client ++;
         break;
