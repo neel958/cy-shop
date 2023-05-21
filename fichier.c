@@ -8,14 +8,12 @@ void lire_produits() {
     }
     
     int nbrl = nbrL(f);
-    char ligne[100];
 
     for (int i = 0; i < nbrl; i++) {    
         if(fscanf(f, "%s %lu %d %c %f", object[i].nom, &object[i].reference, &object[i].quantite, &object[i].taille, &object[i].prix) != 5){
             printf("Erreur de lecture des donnees du fichier <<client.txt>> a la ligne %d\n", i+1);
         }
     }
-
     fclose(f);
 }
 
@@ -72,23 +70,6 @@ void erreur_fichier(){
     printf("Erreur lors de l'ouverture du fichier \n");
 }
 
-int stockAccount(client * c1){
-
-    FILE *acc = fopen("client.txt","r");
-    if(acc == NULL){
-    acc = fopen("client.txt","r");
-    }
-
-    int nbrl =nbrL(acc);
-
-    for(int i=0;i<nbrl;i++){
-
-        fscanf(acc,"%s %s",c1[i].nom,c1[i].prenom);
-    }
-
-    fclose(acc);
-    return nbrl;
-}
 
 
 
@@ -125,20 +106,22 @@ void ecrire_client(char nom [], char prenom[]){
 
 
 
-void ecrire_caracteristiques_produits(produit * p1, int taille){
+void ecrire_caracteristiques_produits(produit * p1){
     FILE* fichier = fopen("produit.txt", "w");
     if (fichier == NULL) {
         printf("Erreur lors de l'ouverture du fichier.\n");
         return;
     }
 
-    for (int i = 0; i < taille; i++) {
-        fprintf(fichier, "%s ", p1[i].nom);
-        fprintf(fichier, "%lu ", p1[i].reference);
-        fprintf(fichier, "%d ", p1[i].quantite);
-        fprintf(fichier, "%c ", p1[i].taille);
-        fprintf(fichier, "%.2f\n", p1[i].prix);
+    for (int i = 0; i < 49; i++) {
+        fprintf(fichier, "%s %lu %d %c %.2f\n", p1[i].nom, p1[i].reference, p1[i].quantite, p1[i].taille, p1[i].prix);
     }
+    fprintf(fichier, "%s ", p1[49].nom);
+    fprintf(fichier, "%lu ", p1[49].reference);
+    fprintf(fichier, "%d ", p1[49].quantite);
+    fprintf(fichier, "%c ", p1[49].taille);
+    fprintf(fichier, "%.2f", p1[49].prix);
+
 
     fclose(fichier);
 }

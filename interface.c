@@ -184,7 +184,7 @@ void afficheModeGestion(){
                 break;
             }
         }
-        ecrire_caracteristiques_produits(object, NOMBRE_MAX_OBJET);
+        ecrire_caracteristiques_produits(object);
         break;
         }
     case 3:

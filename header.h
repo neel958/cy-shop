@@ -47,14 +47,13 @@ void affiche_stock_bas(produit * p1, int nombre_produit);
 void afficher_tout_produits(produit *p1, int nombre_produit);
 void afficher_place_restante(produit produits[], int nombre_produits);
 produit augmenter_stock(produit *produits, int nombre_produits, unsigned long reference);
-void ecrire_caracteristiques_produits(produit * p1, int taille);
+void ecrire_caracteristiques_produits(produit * p1);
 
 
 void lire_produits();
 void ecrire_client(char nom [], char prenom[]);
 void lire_client();
 int nbrL(FILE * file);
-int stockAccount(client * c1);
 void ecrireadmins();
 void erreur_fichier();
 FILE * fichier_client();

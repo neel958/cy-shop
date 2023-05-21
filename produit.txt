@@ -1,6 +1,6 @@
 Pommes 1 5 P 1.00
 Bananes 2 5 P 1.00
-Oranges 3 5 P 1.00
+Cerises 3 5 P 1.00
 Tomates 4 5 P 1.00
 Lait 5 5 P 1.00
 Pain 6 5 P 1.00
