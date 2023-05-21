@@ -7,15 +7,14 @@ client * user = NULL;
 int main(){
     FILE * f_c = fichier_client();
     FILE * f_p = fichier_produit();
-
     ecrireadmins();
+    copier_contenu_fichier();
 
-    object =  malloc(sizeof(produit) * nbrL(f_c));
-    user = malloc(sizeof(client) * nbrL(f_p));
+    object =  malloc(sizeof(produit) * nbrL(f_p));
+    user = malloc(sizeof(client) * nbrL(f_c));
 
     lire_client();
     lire_produits();
-
     int choix;
     affiche_message_entre();
     scanf("%d",&choix);

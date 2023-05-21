@@ -29,9 +29,11 @@ void lire_client() {
     for (int i = 0; i < nbrl; i++) {
         if (fscanf(f, "%s %s", user[i].nom, user[i].prenom) != 2) {
             printf("Erreur de lecture des donnees du fichier <<client.txt>> a la ligne %d\n", i+1);
+
             fclose(f);
             return;
         }
+
     }
 
     fclose(f);
@@ -82,9 +84,8 @@ void ecrireadmins(){
 
     char admin[20] = "Ahmed Nael";
     char admin1[20] = "Khalfane Selim";
-    char saut_ligne[2] = "\n";
     fputs(admin, f);
-    fputs(saut_ligne, f);
+    fputs("\n", f);
     fputs(admin1, f);
     fclose(f);
 }
@@ -113,7 +114,7 @@ void ecrire_caracteristiques_produits(produit * p1){
         return;
     }
 
-    for (int i = 0; i < 49; i++) {
+    for (int i = 0; i < NOMBRE_MAX_OBJET-1; i++) {
         fprintf(fichier, "%s %lu %d %c %.2f\n", p1[i].nom, p1[i].reference, p1[i].quantite, p1[i].taille, p1[i].prix);
     }
     fprintf(fichier, "%s ", p1[49].nom);
@@ -163,4 +164,29 @@ void supprimer_ligne_fichier(int numero_ligne) {
     char commande_renommage[100];
     sprintf(commande_renommage, "mv client2.txt client.txt"); // ATTENTION sur unix remplacer 'mv' au lieu de ren, sur windos mettre ren
     system(commande_renommage);
+}
+
+
+void copier_contenu_fichier() {
+
+    FILE* source = fopen("liste_produit.txt", "r");
+    if (source == NULL) {
+        printf("Erreur lors de l'ouverture du fichier source.\n");
+        return;
+    }
+
+    FILE* destination = fopen("produit.txt", "w");
+    if (destination == NULL) {
+        printf("Erreur lors de l'ouverture du fichier destination.\n");
+        fclose(source);
+        return;
+    }
+
+    char ligne[50];
+    while (fgets(ligne, sizeof(ligne), source) != NULL) {
+        fputs(ligne, destination);
+    }
+
+    fclose(source);
+    fclose(destination);
 }

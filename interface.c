@@ -154,7 +154,7 @@ void afficheModeGestion(){
     int choix = 0;
     printf("\n \nBienvenue à vous dans le mode gesition, tout d'abord voici la liste de nos produits avec les stocks les + bas : \n \n ");
     affiche_stock_bas(object,NOMBRE_MAX_OBJET);
-    afficher_place_restante(object, NOMBRE_MAX_OBJET);
+    int place_actuelle = afficher_place_restante(object, NOMBRE_MAX_OBJET);
     do
     {
     printf("\n \nA vous s'offre maintenant plusieurs choix \n");
@@ -174,7 +174,7 @@ void afficheModeGestion(){
         unsigned long reference;
         printf("Entrez la reference du produit dont vous souhaitez augmenter le stock \n");
         scanf("%lu", &reference);
-        produit px = augmenter_stock(object,NOMBRE_MAX_OBJET,reference);
+        produit px = augmenter_stock(object,NOMBRE_MAX_OBJET,reference, place_actuelle);
         if(px.reference==-5){
             exit(1);
         }

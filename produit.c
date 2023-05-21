@@ -230,7 +230,7 @@ void affiche_stock_bas(produit * p1, int nombre_produit){
     for(int i = 0; i < 5 ; i ++){
         int min = i;
         for(int j = i + 1 ; j < nombre_produit ; j++){
-            if (p1[j].quantite < p1[i].quantite){
+            if (p1[j].quantite < p1[min].quantite){
                 min = j;               
             }
         }
@@ -242,7 +242,7 @@ void affiche_stock_bas(produit * p1, int nombre_produit){
 }
 
 
-void afficher_place_restante(produit produits[], int nombre_produits) {
+int afficher_place_restante(produit produits[], int nombre_produits) {
     int place_totale = 300;
     int place_occupee = 0;
 
@@ -259,11 +259,11 @@ void afficher_place_restante(produit produits[], int nombre_produits) {
     }
 
     int place_restante = place_totale - place_occupee;
-
     printf("Il reste %d places disponibles.\n", place_restante);
+    return place_restante;
 }
 
-produit augmenter_stock(produit *p1, int nombre_produits, unsigned long reference){
+produit augmenter_stock(produit *p1, int nombre_produits, unsigned long reference, int place_restante){
     int index_produit = -1;
     produit p_poubelle;
     p_poubelle.reference = -5;
@@ -275,12 +275,12 @@ produit augmenter_stock(produit *p1, int nombre_produits, unsigned long referenc
     }
 
     if (index_produit == -1) {
-        printf("Le produit avec la référence %lu n'a pas été trouvé.\n", reference);
+        printf("Le produit avec la reference %lu n'a pas ete trouve.\n", reference);
         return p_poubelle;
     }
 
     int quantite_ajoutee;
-    printf("Combien d'unités voulez-vous ajouter pour le produit %s ?\n", p1[index_produit].nom);
+    printf("Combien d'unite voulez-vous ajouter pour le produit %s ?\n", p1[index_produit].nom);
     scanf("%d", &quantite_ajoutee);
 
     int taille_produit = 0;
@@ -292,10 +292,9 @@ produit augmenter_stock(produit *p1, int nombre_produits, unsigned long referenc
         taille_produit = 4;
     }
 
-    int stock_actuel = quantite_ajoutee + p1[index_produit].quantite;
-    int taille_stock_actuel = stock_actuel * taille_produit;
+    int taille_stock_actuel = quantite_ajoutee * taille_produit;
 
-    if (taille_stock_actuel > TAILLE_MAX) {
+    if (taille_stock_actuel + (300-place_restante) >= TAILLE_MAX) {
         printf("Impossible d'ajouter cette quantité de produit, le stock est plein.\n");
         return p_poubelle;
     }
