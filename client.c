@@ -53,7 +53,7 @@ void modifier_client(client *c1, int nbr_client, char nom[50]){
 void afficher3DerniersAchats(client * c1){
     int j, i ;
     printf("Voici les 3 derniers achats de votre compte : \n");
-    for(i = 4, j = 1; i < 1; i--, j++){
+    for(i = 4, j = 1; i > 1; i--, j++){
         printf("Voici votre achat numero %d :\nNom : %s \n ", j, c1->historique_achats[i].nom);
     }
 }

@@ -123,7 +123,7 @@ produit trouver_produit(produit *p1, int nbr_produit){
         case 1: {
             int valeur = -1;
             unsigned long ref;
-            printf("Indiquez la reference du produit dont vous souhaitez connaitre le stock : ");
+            printf("Indiquez la reference du produit que vous recherchez : ");
             scanf("%lu", &ref);
             for (int i = 0; i < nbr_produit; i++) {
                 if (p1[i].reference == ref) {

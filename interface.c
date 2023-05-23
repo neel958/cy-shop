@@ -85,6 +85,7 @@ void affiche_mode_achat(){
                         break;
                     }
                 }
+                ecrire_caracteristiques_produits(object);
                 break;
             case 2:  
                 break;
