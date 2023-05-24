@@ -1,33 +1,30 @@
 #include "header.h"
 
-
+float prix_total = 0 ;
+int numero_client = 2;
 
 
 void affiche_mode_achat(){
-    
+    int numero_actuelle_client = 0;
     int choix, choix1;
-    float prix_total = 0 ;
-    int numero_client = 2;
+    int numero_achat = 0;
+    
+    int verif = 0;
+   
     printf("\nAvez vous un compte client ? \n1 pour oui \n2 pour non \n \n");
     scanf("%d", &choix);
     switch (choix)
     {
     case 1:
     {
-        int var;
         char nom[50];
         char prenom[50];
         printf("\nEntrez votre nom, puis votre prenom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prenom. \n");
         scanf("%s", nom);
         scanf("%s", prenom);
-        var = rechercher_client(user, nom, prenom);
-        if(var!=-1){
-        afficher3DerniersAchats(user);
-        }
-        else if(var == -1){
-            return;
-        }
-
+        rechercher_client(user, nom, prenom);
+        int var = trouver_position_client(nom, prenom);
+        afficher3DerniersAchats(user[var]);
         break;
     }
     case 2:
@@ -39,9 +36,8 @@ void affiche_mode_achat(){
         break;
 
     default:
-        printf("\nVous n'avez pas rentre de chiffre correct \n");
+        affiche_default();
         return;
-        break;
     }
     choix1 = 0;
 
@@ -53,16 +49,18 @@ void affiche_mode_achat(){
         printf("Tapez 4 pour ajouter un client à la liste \n");
         printf("Tapez 5 pour afficher la liste complete de produit \n");
         printf("Tapez 6 si vous souhaitez vous desinscrire de notre magasin \n");
-        printf("Tapez 7 pour quitter l'interface \n \n");
+        printf("Tapez 7 pour finaliser l'achat \n");
+        printf("Tapez 8 pour afficher vos 3 derniers achats \n");
+        printf("Tapez 9 pour quitter l'interface \n \n");
+
         scanf("%d", &choix1);
         switch (choix1)
         {
         case 1:
         {
             int choix_achat = 0;
-            produit p1;
-            p1 = trouver_produit(object, NOMBRE_MAX_OBJET);
-            if(p1.quantite == -4){
+            produit p1 = trouver_produit(object, NOMBRE_MAX_OBJET);
+            if(p1.quantite == -5){
                 exit(1);
             }
             if(p1.quantite == 0){
@@ -78,27 +76,35 @@ void affiche_mode_achat(){
             case 1:       
                 p1.quantite -= 1;
                 prix_total += p1.prix;
-                printf("\nVous avez achete le produit avec succes \n");
                 for(int i = 0; i < NOMBRE_MAX_OBJET ; i++){
                     if(strcmp(object[i].nom,p1.nom)  == 0){
                         object[i].quantite = p1.quantite;
                         break;
                     }
                 }
+                char nom[50];
+                char prenom[50];
+                printf("\nEntrez votre nom, puis votre prenom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prenom. \n");
+                scanf("%s", nom);
+                scanf("%s", prenom);
+                numero_actuelle_client = trouver_position_client(nom, prenom);
+                strcpy(user[numero_actuelle_client].historique_achats[numero_achat].nom, p1.nom);
                 ecrire_caracteristiques_produits(object);
+                numero_achat ++;
+                printf("\nVous avez achete le produit avec succes \n");
                 break;
             case 2:  
                 break;
             default:
-                printf("Vous n'avez ni rentrer 1 ni 2 \n");
-                break;
+                affiche_default();
+                return;
             }
             
             break;
         }
         case 2:
         {
-            printf("\nVoici le prix total de vos achats pour l'instant : %.2f € \n", prix_total);
+            printf("\nVoici le prix total de vos achats pour l'instant : %.2f euros \n", prix_total);
 
             break;
         
@@ -143,12 +149,29 @@ void affiche_mode_achat(){
             break;
         }
         case 7:
+            printf("Vous avez paye %.2f euros \n");
+            prix_total=0;
+            
             break;
-        default:
-            printf("Vous n'avez pas rentré de nombre correct \n");
+        case 8:
+        {
+        char nom[50];
+        char prenom[50];
+        printf("\nEntrez votre nom, puis votre prenom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prenom. \n");
+        scanf("%s", nom);
+        scanf("%s", prenom);
+        rechercher_client(user, nom, prenom);
+        int var = trouver_position_client(nom, prenom);
+        afficher3DerniersAchats(user[var]);  
             break;
         }
-    } while (choix1 != 6);
+        case 9:
+            break;
+        default:
+            affiche_default();
+            return;
+        }
+    } while (choix1 != 9);
 }
 
 void afficheModeGestion(){
@@ -167,36 +190,36 @@ void afficheModeGestion(){
 
     switch (choix)
     {
-    case 1:
-        recherche_stock_produit(object, NOMBRE_MAX_OBJET);
-        break;
-    case 2:
-        {
-        unsigned long reference;
-        printf("Entrez la reference du produit dont vous souhaitez augmenter le stock \n");
-        scanf("%lu", &reference);
-        produit px = augmenter_stock(object,NOMBRE_MAX_OBJET,reference, place_actuelle);
-        if(px.reference==-5){
-            exit(1);
-        }
-        for(int i = 0; i < NOMBRE_MAX_CLIENT ; i++){
-            if(strcmp(object[i].nom,px.nom)  == 0){
-                object[i].quantite = px.quantite;
-                break;
+        case 1:
+            recherche_stock_produit(object, NOMBRE_MAX_OBJET);
+            break;
+        case 2:
+            {
+            unsigned long reference;
+            printf("Entrez la reference du produit dont vous souhaitez augmenter le stock \n");
+            scanf("%lu", &reference);
+            produit px = augmenter_stock(object,NOMBRE_MAX_OBJET,reference, place_actuelle);
+            if(px.reference==-5){
+                exit(1);
             }
+            for(int i = 0; i < NOMBRE_MAX_CLIENT ; i++){
+                if(strcmp(object[i].nom,px.nom)  == 0){
+                    object[i].quantite = px.quantite;
+                    break;
+                }
+            }
+            ecrire_caracteristiques_produits(object);
+            break;
+            }
+        case 3:
+                affiche_mode_achat();
+            break;
+        case 4:
+            break;
+        default:
+            affiche_default();
+            return;
         }
-        ecrire_caracteristiques_produits(object);
-        break;
-        }
-    case 3:
-            affiche_mode_achat();
-        break;
-    case 4:
-        break;
-    default:
-        printf("Vous n'avez pas saisi un nombre correct \n");
-        break;
-}
 
     } while (choix != 4);
     

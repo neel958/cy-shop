@@ -11,7 +11,7 @@ Oeufs 10 5 P 1.00
 Pommes 11 5 P 1.00
 Boeuf 12 2 G 5.00
 Saumon 13 5 P 1.00
-Thon-en-conserve 14 4 P 1.00
+Thon-en-conserve 14 5 P 1.00
 Carottes 15 5 P 1.00
 Poivrons 16 5 P 1.00
 Concombre 17 5 P 1.00

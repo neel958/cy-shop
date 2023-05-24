@@ -105,7 +105,6 @@ int supprimer_produit(produit *produits, int *nombre_produits, unsigned long ref
         produits[i] = produits[i + 1];
     }
 
-    // Diminuer le nombre de produits
     (*nombre_produits)--;
 
     printf("Le produit avec la référence %lu a été supprimé avec succès.\n", reference);
@@ -115,7 +114,7 @@ int supprimer_produit(produit *produits, int *nombre_produits, unsigned long ref
 
 produit trouver_produit(produit *p1, int nbr_produit){
     produit produit_poubelle;
-    produit_poubelle.quantite = -4;
+    produit_poubelle.quantite = -5;
     int choix;
     printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la reference \nTapez 2 pour le chercher par le nom\n\n");
     scanf("%d", &choix);
@@ -132,7 +131,7 @@ produit trouver_produit(produit *p1, int nbr_produit){
                 }
             }
             if (valeur == -1) {
-                printf("Aucun produit n'a ete trouve avec la reference %lu \n", ref);
+                printf("Aucun produit n'a ete trouve avec la reference que vous avez entre \n");
                 return produit_poubelle;
             }
         }
@@ -155,8 +154,8 @@ produit trouver_produit(produit *p1, int nbr_produit){
         }
             break;
         default:
-            printf("Entrez un chiffre correcte \n");
-            break;
+            affiche_default();
+            return produit_poubelle;
     }
 }
 
@@ -211,8 +210,8 @@ void recherche_stock_produit(produit *p1, int nbr_produit){
         }
             break;
         default:
-            printf("Entrez un chiffre correcte \n");
-            break;
+            affiche_default();
+            exit(1);
     }
 }
 
@@ -275,7 +274,7 @@ produit augmenter_stock(produit *p1, int nombre_produits, unsigned long referenc
     }
 
     if (index_produit == -1) {
-        printf("Le produit avec la reference %lu n'a pas ete trouve.\n", reference);
+        printf("Le produit avec la reference que vous avez rentre n'a pas ete trouve.\n");
         return p_poubelle;
     }
 

@@ -50,11 +50,27 @@ void modifier_client(client *c1, int nbr_client, char nom[50]){
 }
 
 
-void afficher3DerniersAchats(client * c1){
-    int j, i ;
-    printf("Voici les 3 derniers achats de votre compte : \n");
-    for(i = 4, j = 1; i > 1; i--, j++){
-        printf("Voici votre achat numero %d :\nNom : %s \n ", j, c1->historique_achats[i].nom);
+void afficher3DerniersAchats(client c1) {
+    int nbAchats = 0;
+
+    for (int i = 0; i < sizeof(c1.historique_achats) / sizeof(c1.historique_achats[0]); i++) {
+        if (strcmp(c1.historique_achats[i].nom, "") != 0) {
+            nbAchats++;
+        }
+    }
+
+    if (nbAchats == 0) {
+        printf("Vous n'avez pas encore effectue d'achat.\n");
+    } else if (nbAchats == 1) {
+        printf("Voici votre seul achat :\nNom : %s\n", c1.historique_achats[0].nom);
+    } else {
+        int start = nbAchats - 3;
+        if (start < 0) {
+            start = 0;
+        }
+        for (int i = nbAchats - 1, j = 1; i >= start; i--, j++) {
+            printf("Achat numero %d :\nNom : %s\n", i, c1.historique_achats[i].nom);
+        }
     }
 }
 
@@ -85,11 +101,11 @@ int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]
     return index_produit+1;
 }
 
-int rechercher_client(client *c1, char nom[], char prenom[]){
+void rechercher_client(client *c1, char nom[], char prenom[]){
     FILE* f_client = fopen("client.txt", "rb");
     if (f_client == NULL) {
         printf("Erreur d'ouverture du fichier \n");
-        return 0;
+        return;
     }
 
     int valeur = -1;
@@ -97,11 +113,40 @@ int rechercher_client(client *c1, char nom[], char prenom[]){
         if (strcmp(c1[i].nom, nom) == 0 && strcmp(c1[i].prenom, prenom) == 0) {
             printf("Bienvenue monsieur %s %s \n \n", nom, prenom);
             valeur = i;
-            return valeur;
+            return;
         }
     }
     if (valeur == -1) {
         printf("Nous n'avons pas trouve de %s %s.\n", nom, prenom);
+        exit (1);
+    }
+}
+
+int trouver_position_client(char nom[], char prenom[]) {
+    FILE* fichier = fopen("client.txt", "r");
+    if (fichier == NULL) {
+        printf("Erreur lors de l'ouverture du fichier.\n");
         return -1;
     }
+
+    char ligne[256];
+    int position = 0;
+
+    while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+        char* nom_client = strtok(ligne, " \n");
+        char* prenom_client = strtok(NULL, " \n");
+
+        if (nom_client != NULL && prenom_client != NULL) {
+            if (strcmp(nom_client, nom) == 0 && strcmp(prenom_client, prenom) == 0) {
+                fclose(fichier);
+                return position;
+            }
+        }
+
+        position++;
+    }
+
+    fclose(fichier);
+    printf("Nous n'avons pas trouve vos identifiants dans la base de donnee \n");
+    return -1;
 }

@@ -65,8 +65,7 @@ void copier_contenu_fichier();
 client ajouter_client(client c1);
 void modifier_client(client *c1, int nbr_client, char nom[50]);
 int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]);
-int rechercher_client(client *c1, char nom[], char prenom[]);
-void afficher3DerniersAchats(client * c1);
-
-
+void rechercher_client(client *c1, char nom[], char prenom[]);
+void afficher3DerniersAchats(client c1);
+int trouver_position_client(char nom [], char prenom[]);
 
