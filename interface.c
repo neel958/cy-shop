@@ -15,7 +15,7 @@ void affiche_mode_achat(){
     scanf("%d", &choix);
     switch (choix)
     {
-    case 1:
+    case 1:                 //verification de si l'utilisateur a un compte client, si non alors on en crée un, si oui on verifie et on affiche ses 3 derniers achats
     {
         char nom[50];
         char prenom[50];
@@ -60,7 +60,7 @@ void affiche_mode_achat(){
         {
             int choix_achat = 0;
             produit p1 = trouver_produit(object, NOMBRE_MAX_OBJET);
-            if(p1.quantite == -5){
+            if(p1.quantite == -5){                              //verifie si le produit retourné est le produit poubelle, si c'est le cas alors on quitte le code
                 exit(1);
             }
             if(p1.quantite == 0){
@@ -74,7 +74,7 @@ void affiche_mode_achat(){
             switch (choix_achat)
             {
             case 1:       
-                p1.quantite -= 1;
+                p1.quantite -= 1;           //achat du produit, diminue la quantité de 1 et augmente le prix du prix total, affecte ensuite la valeurs du produit acheté au produit dans le tableau
                 prix_total += p1.prix;
                 for(int i = 0; i < NOMBRE_MAX_OBJET ; i++){
                     if(strcmp(object[i].nom,p1.nom)  == 0){
@@ -88,8 +88,8 @@ void affiche_mode_achat(){
                 scanf("%s", nom);
                 scanf("%s", prenom);
                 numero_actuelle_client = trouver_position_client(nom, prenom);
-                strcpy(user[numero_actuelle_client].historique_achats[numero_achat].nom, p1.nom);
-                ecrire_caracteristiques_produits(object);
+                strcpy(user[numero_actuelle_client].historique_achats[numero_achat].nom, p1.nom);   //rempli l'historique d'achat
+                ecrire_caracteristiques_produits(object);                                           //modifie le fichier produit.txt en fonction des achats
                 numero_achat ++;
                 printf("\nVous avez achete le produit avec succes \n");
                 break;
@@ -120,7 +120,7 @@ void affiche_mode_achat(){
                 return;
             }
             else{
-                user[numero_client] = ajouter_client(user[numero_client]);
+                user[numero_client] = ajouter_client(user[numero_client]);                              //ajoute le client numero 'numero_client'
                 printf("Bienvenue %s %s \n \n", user[numero_client].nom, user[numero_client].prenom);
                 ecrire_client(user[numero_client].nom, user[numero_client].prenom);
                 numero_client ++;
@@ -129,7 +129,7 @@ void affiche_mode_achat(){
             break;
         case 5:
             for(int i = 0 ; i < NOMBRE_MAX_OBJET ; i++){
-                printf("Nom du produit : %s / Stock restant : %d / Prix : %.2f euros / Numero de reference : %lu\n",object[i].nom,object[i].quantite,object[i].prix,object[i].reference);
+                printf("Nom : %s / Stock restant : %d / Prix : %.2f euros / Numero de reference : %lu\n",object[i].nom,object[i].quantite,object[i].prix,object[i].reference);
             }
             break;
         case 6:
@@ -141,12 +141,12 @@ void affiche_mode_achat(){
             scanf("%s", nom_supp);
             printf("Entrez maintenant votre prenom \n");
             scanf("%s", prenom_supp);
-            
             int client_a_supp = supprimer_client(user, &numero_client ,nom_supp, prenom_supp);
-
-            supprimer_ligne_fichier(client_a_supp);
+            supprimer_ligne_fichier(client_a_supp);     //supprime le client du fichier (marche que sur linux)
+            lire_client();                              //stock les informations du fichier dans le tableau de client, car la fonction 'supprimer_client' ne supprime ,pas reellement un client, elle decale tout les 
 
             break;
+
         }
         case 7:
             printf("Vous avez paye %.2f euros \n");
@@ -161,8 +161,8 @@ void affiche_mode_achat(){
         scanf("%s", nom);
         scanf("%s", prenom);
         rechercher_client(user, nom, prenom);
-        int var = trouver_position_client(nom, prenom);
-        afficher3DerniersAchats(user[var]);  
+        int var = trouver_position_client(nom, prenom);         //cherche la position du client dans le fichier et renvoie cette position
+        afficher3DerniersAchats(user[var]);                     //affiche l'historique d'achat du client numero 'var' (var= position)
             break;
         }
         case 9:
@@ -199,16 +199,16 @@ void afficheModeGestion(){
             printf("Entrez la reference du produit dont vous souhaitez augmenter le stock \n");
             scanf("%lu", &reference);
             produit px = augmenter_stock(object,NOMBRE_MAX_OBJET,reference, place_actuelle);
-            if(px.reference==-5){
+            if(px.reference==-5){       //verifie si le produit retourné est le produit poubelle, si c'est le cas alors on quitte le programme
                 exit(1);
             }
             for(int i = 0; i < NOMBRE_MAX_CLIENT ; i++){
                 if(strcmp(object[i].nom,px.nom)  == 0){
-                    object[i].quantite = px.quantite;
+                    object[i].quantite = px.quantite;               //met a jour le tableau avec la nouvelle quantité de stock
                     break;
                 }
             }
-            ecrire_caracteristiques_produits(object);
+            ecrire_caracteristiques_produits(object);               //met a jour le fichier produit.txt
             break;
             }
         case 3:

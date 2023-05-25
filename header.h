@@ -38,13 +38,9 @@ void affiche_default();
 
 
 void affiche_produit(produit* p1);
-produit ajouterproduit(produit p1, int num_produit);
-void modifier_produit(produit produits[], int nombre_produits, unsigned long reference);
-int supprimer_produit(produit *produits, int *nombre_produits, unsigned long reference);
 produit trouver_produit(produit *p1, int nbr_produit);
 void recherche_stock_produit(produit *p1, int nbr_produit);
 void affiche_stock_bas(produit * p1, int nombre_produit);
-void afficher_tout_produits(produit *p1, int nombre_produit);
 int afficher_place_restante(produit produits[], int nombre_produits);
 produit augmenter_stock(produit *produits, int nombre_produits, unsigned long reference, int place_restante);
 void ecrire_caracteristiques_produits(produit * p1);
@@ -63,7 +59,6 @@ void copier_contenu_fichier();
 
 
 client ajouter_client(client c1);
-void modifier_client(client *c1, int nbr_client, char nom[50]);
 int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]);
 void rechercher_client(client *c1, char nom[], char prenom[]);
 void afficher3DerniersAchats(client c1);

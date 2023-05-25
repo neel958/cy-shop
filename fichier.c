@@ -10,7 +10,7 @@ void lire_produits() {
     int nbrl = nbrL(f);
 
     for (int i = 0; i < nbrl; i++) {    
-        if(fscanf(f, "%s %lu %d %c %f", object[i].nom, &object[i].reference, &object[i].quantite, &object[i].taille, &object[i].prix) != 5){
+        if(fscanf(f, "%s %lu %d %c %f", object[i].nom, &object[i].reference, &object[i].quantite, &object[i].taille, &object[i].prix) != 5){    //lecture des donners du fichier, les stock dans le tableau
             printf("Erreur de lecture des donnees du fichier <<client.txt>> a la ligne %d\n", i+1);
         }
     }
@@ -27,7 +27,7 @@ void lire_client() {
     int nbrl =nbrL(f);
 
     for (int i = 0; i < nbrl; i++) {
-        if (fscanf(f, "%s %s", user[i].nom, user[i].prenom) != 2) {
+        if (fscanf(f, "%s %s", user[i].nom, user[i].prenom) != 2) {                 //lecture des donners du fichier, les stock dans le tableau
             printf("Erreur de lecture des donnees du fichier <<client.txt>> a la ligne %d\n", i+1);
 
             fclose(f);
@@ -47,7 +47,7 @@ int nbrL(FILE *file){
 
     while ((c=getc(file))!=EOF){
 
-        if (c=='\n'){
+        if (c=='\n'){           //compte le nombre de ligne dans un fichier
             i++;
         }
     }
@@ -121,7 +121,7 @@ void ecrire_caracteristiques_produits(produit * p1){
     fprintf(fichier, "%lu ", p1[49].reference);
     fprintf(fichier, "%d ", p1[49].quantite);
     fprintf(fichier, "%c ", p1[49].taille);
-    fprintf(fichier, "%.2f", p1[49].prix);
+    fprintf(fichier, "%.2f", p1[49].prix);          //ecris sans saut a la ligne, sinon ca comptera comme 51 produit
 
 
     fclose(fichier);

@@ -11,50 +11,12 @@ client ajouter_client(client c1){
     return c1;
 }
 
-void modifier_client(client *c1, int nbr_client, char nom[50]){
-    int index_client = -1;
-    
-
-    for (int i = 0; i < nbr_client; i++) {
-        if (c1[i].nom == nom) {
-            index_client = i;
-            break;
-        }
-    }
-
-
-    if (index_client == -1) {
-        printf("Monsieur %s n'a pas été trouvé dans notre base de donnee \n", nom);
-        return;
-    }
-
-    int choix;
-    printf("Que voulez vous changez dans la fiche client de monsieur %s ? \n Tapez 1 pour changer son nom, \n Tapez 2 pour changer son prenom \n", nom);
-    scanf("%d", &choix);
-    switch (choix)
-    {
-    case 1:
-        printf("Tapez le nouveau nom du clien : \n");
-        scanf("%s", c1[index_client].nom);
-        break;
-    
-    case 2:
-        printf("Tapez le nouveau prenom du client : \n");
-        scanf("%s", c1[index_client].prenom);
-        break;
-
-    default:
-        printf("Vous n'avez ni rentré 1 ni 2 \n");
-        break;
-    }
-}
-
 
 void afficher3DerniersAchats(client c1) {
     int nbAchats = 0;
 
     for (int i = 0; i < sizeof(c1.historique_achats) / sizeof(c1.historique_achats[0]); i++) {
-        if (strcmp(c1.historique_achats[i].nom, "") != 0) {
+        if (strcmp(c1.historique_achats[i].nom, "") != 0) {         //compte le nombre d'achat de l'utilisateur
             nbAchats++;
         }
     }
@@ -69,36 +31,36 @@ void afficher3DerniersAchats(client c1) {
             start = 0;
         }
         for (int i = nbAchats - 1, j = 1; i >= start; i--, j++) {
-            printf("Achat numero %d :\nNom : %s\n", i, c1.historique_achats[i].nom);
+            printf("Achat numero %d :\nNom : %s\n", i+1 , c1.historique_achats[i].nom);     //affiche les 3 derniers achats
         }
     }
 }
 
 
 int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]){
-    int index_produit = -1;
+    int index_client = -1;
 
     for (int i = 0; i < *nombre_clients; i++) {
         if (strcmp(c1[i].nom, nom) == 0 && strcmp(c1[i].prenom, prenom) == 0){
-            index_produit = i;
+            index_client = i;
             break;
         }
     }
 
 
-    if (index_produit == -1) {
+    if (index_client == -1) {
         printf("Monsieur %s %s n'a pas ete trouve dans notre base de donnee.\n", nom, prenom);
         return -1;
     }
 
-    for (int i = index_produit; i < *nombre_clients - 1; i++) {
-        c1[i] = c1[i + 1];
+    for (int i = index_client; i < *nombre_clients - 1; i++) {
+        c1[i] = c1[i + 1];                          //supprime pas vraiment le client, il le decale juste vers la droite
     }
 
-    (*nombre_clients)--;
+    (*nombre_clients)--;                            //decremente la variable nombre_client de 1
 
     printf("Monsieur %s %s a ete supprime de la base de donnee avec succes.\n", nom, prenom);
-    return index_produit+1;
+    return index_client+1;
 }
 
 void rechercher_client(client *c1, char nom[], char prenom[]){
@@ -129,11 +91,11 @@ int trouver_position_client(char nom[], char prenom[]) {
         return -1;
     }
 
-    char ligne[256];
+    char ligne[256];                                            //utilise un tableau de caractères ligne pour stocker chaque ligne du fichier. La taille du tableau est fixée à 256 caractères.
     int position = 0;
 
-    while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
-        char* nom_client = strtok(ligne, " \n");
+    while (fgets(ligne, sizeof(ligne), fichier) != NULL) {      //lit chaque ligne du fichier à l'aide de la fonction fgets. Si la fin du fichier est atteinte, la boucle s'arrête.
+        char* nom_client = strtok(ligne, " \n");                //extrait les noms et prenoms du fihcier avec la fonction strtok à l'aide ds delimiteur comme le saut a la ligne ou l'espace
         char* prenom_client = strtok(NULL, " \n");
 
         if (nom_client != NULL && prenom_client != NULL) {
