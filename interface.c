@@ -19,7 +19,7 @@ void affiche_mode_achat(){
     {
         char nom[50];
         char prenom[50];
-        printf("\nEntrez votre nom, puis votre prenom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prenom. \n");
+        printf("\nEntrez votre nom, puis votre prénom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prenom. \n");
         scanf("%s", nom);
         scanf("%s", prenom);
         rechercher_client(user, nom, prenom);
@@ -28,7 +28,7 @@ void affiche_mode_achat(){
         break;
     }
     case 2:
-        printf("\nNous allons vous creer un compte client \n\n");
+        printf("\nNous allons vous créer un compte client \n\n");
         user[numero_client] = ajouter_client(user[numero_client]);
         printf("Bienvenue %s %s \n\n", user[numero_client].nom, user[numero_client].prenom);
         ecrire_client(user[numero_client].nom, user[numero_client].prenom);
@@ -47,8 +47,8 @@ void affiche_mode_achat(){
         printf("Tapez 2 pour afficher le prix total \n");
         printf("Tapez 3 pour basculer vers le mode gestion \n");
         printf("Tapez 4 pour ajouter un client à la liste \n");
-        printf("Tapez 5 pour afficher la liste complete de produit \n");
-        printf("Tapez 6 si vous souhaitez vous desinscrire de notre magasin \n");
+        printf("Tapez 5 pour afficher la liste complète de produit \n");
+        printf("Tapez 6 si vous souhaitez vous désinscrire de notre magasin \n");
         printf("Tapez 7 pour finaliser l'achat \n");
         printf("Tapez 8 pour afficher vos 3 derniers achats \n");
         printf("Tapez 9 pour quitter l'interface \n \n");
@@ -64,7 +64,7 @@ void affiche_mode_achat(){
                 exit(1);
             }
             if(p1.quantite == 0){
-                printf("Nous sommes desole mais ce produit est en rupture se stock \n");
+                printf("Nous sommes desolé mais ce produit est en rupture de stock \n");
                 exit(1);
             }
 
@@ -84,14 +84,14 @@ void affiche_mode_achat(){
                 }
                 char nom[50];
                 char prenom[50];
-                printf("\nEntrez votre nom, puis votre prenom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prenom. \n");
+                printf("\nEntrez votre nom, puis votre prenom. Attention ne mettez pas d'accent. Et respectez les majuscules en début de nom/prénom. \n");
                 scanf("%s", nom);
                 scanf("%s", prenom);
                 numero_actuelle_client = trouver_position_client(nom, prenom);
                 strcpy(user[numero_actuelle_client].historique_achats[numero_achat].nom, p1.nom);   //rempli l'historique d'achat
                 ecrire_caracteristiques_produits(object);                                           //modifie le fichier produit.txt en fonction des achats
                 numero_achat ++;
-                printf("\nVous avez achete le produit avec succes \n");
+                printf("\nVous avez acheté le produit avec succès \n");
                 break;
             case 2:  
                 break;
@@ -104,7 +104,7 @@ void affiche_mode_achat(){
         }
         case 2:
         {
-            printf("\nVoici le prix total de vos achats pour l'instant : %.2f euros \n", prix_total);
+            printf("\nVoici le prix total de vos achats pour l'instant : %.2f € \n", prix_total);
 
             break;
         
@@ -116,7 +116,7 @@ void affiche_mode_achat(){
         
         case 4: 
             if(numero_client > NOMBRE_MAX_CLIENT){
-                printf("Vous avez depasse la limite maximal d'utilisateur \n");
+                printf("Vous avez depassé la limite maximale d'utilisateur \n");
                 return;
             }
             else{
@@ -129,7 +129,7 @@ void affiche_mode_achat(){
             break;
         case 5:
             for(int i = 0 ; i < NOMBRE_MAX_OBJET ; i++){
-                printf("Nom : %s / Stock restant : %d / Prix : %.2f euros / Numero de reference : %lu\n",object[i].nom,object[i].quantite,object[i].prix,object[i].reference);
+                printf("Nom : %s / Stock restant : %d / Prix : %.2f euros / Numéro de référence : %lu\n",object[i].nom,object[i].quantite,object[i].prix,object[i].reference);
             }
             break;
         case 6:
@@ -139,7 +139,7 @@ void affiche_mode_achat(){
 
             printf("Entrez votre Nom : \n");
             scanf("%s", nom_supp);
-            printf("Entrez maintenant votre prenom \n");
+            printf("Entrez maintenant votre prénom \n");
             scanf("%s", prenom_supp);
             int client_a_supp = supprimer_client(user, &numero_client ,nom_supp, prenom_supp);
             supprimer_ligne_fichier(client_a_supp);     //supprime le client du fichier (marche que sur linux)
@@ -150,14 +150,14 @@ void affiche_mode_achat(){
 
         }
         case 7:
-            printf("Vous avez paye %.2f euros \n", prix_total);
+            printf("Vous avez payé %.2f € \n", prix_total);
             prix_total=0;
             break;
         case 8:
         {
         char nom[50];
         char prenom[50];
-        printf("\nEntrez votre nom, puis votre prenom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prenom. \n");
+        printf("\nEntrez votre nom, puis votre prénom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prénom. \n");
         scanf("%s", nom);
         scanf("%s", prenom);
         rechercher_client(user, nom, prenom);
@@ -182,8 +182,8 @@ void afficheModeGestion(){
     do
     {
     printf("\n \nA vous s'offre maintenant plusieurs choix \n");
-    printf("Tappez 1 pour connaitre le stock du produit que vous desirez \n");
-    printf("Tappez 2 pour augmenter le stock d'un produit que vous desirez \n");
+    printf("Tappez 1 pour connaître le stock du produit que vous desirez \n");
+    printf("Tappez 2 pour augmenter le stock d'un produit que vous désirez \n");
     printf("Tappez 3  pour basculer vers le mode achat \n");
     printf("Tappez 4 pour quitter l'interface \n");
     scanf("%d", &choix);
@@ -196,7 +196,7 @@ void afficheModeGestion(){
         case 2:
             {
             unsigned long reference;
-            printf("Entrez la reference du produit dont vous souhaitez augmenter le stock \n");
+            printf("Entrez la référence du produit dont vous souhaitez augmenter le stock \n");
             scanf("%lu", &reference);
             produit px = augmenter_stock(object,NOMBRE_MAX_OBJET,reference, place_actuelle);
             if(px.reference==-5){       //verifie si le produit retourné est le produit poubelle, si c'est le cas alors on quitte le programme

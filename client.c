@@ -5,7 +5,7 @@ client ajouter_client(client c1){
     printf("Quel est votre nom ? \n");
     scanf("%s", c1.nom);
 
-    printf("Quel est votre prenom ? \n");
+    printf("Quel est votre prénom ? \n");
     scanf("%s", c1.prenom);
 
     return c1;
@@ -22,7 +22,7 @@ void afficher3DerniersAchats(client c1) {
     }
 
     if (nbAchats == 0) {
-        printf("Vous n'avez pas encore effectue d'achat.\n");
+        printf("Vous n'avez pas encore effectué d'achat.\n");
     } else if (nbAchats == 1) {
         printf("Voici votre seul achat :\nNom : %s\n", c1.historique_achats[0].nom);
     } else {
@@ -31,7 +31,7 @@ void afficher3DerniersAchats(client c1) {
             start = 0;
         }
         for (int i = nbAchats - 1, j = 1; i >= start; i--, j++) {
-            printf("Achat numero %d :\nNom : %s\n", i+1 , c1.historique_achats[i].nom);     //affiche les 3 derniers achats
+            printf("Achat numéro %d :\nNom : %s\n", i+1 , c1.historique_achats[i].nom);     //affiche les 3 derniers achats
         }
     }
 }
@@ -49,7 +49,7 @@ int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]
 
 
     if (index_client == -1) {
-        printf("Monsieur %s %s n'a pas ete trouve dans notre base de donnee.\n", nom, prenom);
+        printf("Monsieur %s %s n'a pas été trouvé dans notre base de donnée.\n", nom, prenom);
         return -1;
     }
 
@@ -59,7 +59,7 @@ int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]
 
     (*nombre_clients)--;                            //decremente la variable nombre_client de 1
 
-    printf("Monsieur %s %s a ete supprime de la base de donnee avec succes.\n", nom, prenom);
+    printf("Monsieur %s %s a ete supprimé de la base de donnée avec succès.\n", nom, prenom);
     return index_client+1;
 }
 
@@ -79,7 +79,7 @@ void rechercher_client(client *c1, char nom[], char prenom[]){
         }
     }
     if (valeur == -1) {
-        printf("Nous n'avons pas trouve de %s %s.\n", nom, prenom);
+        printf("Nous n'avons pas trouvé de %s %s.\n", nom, prenom);
         exit (1);
     }
 }
@@ -109,6 +109,6 @@ int trouver_position_client(char nom[], char prenom[]) {
     }
 
     fclose(fichier);
-    printf("Nous n'avons pas trouve vos identifiants dans la base de donnee \n");
+    printf("Nous n'avons pas trouvé vos identifiants dans la base de donnée \n");
     return -1;
 }

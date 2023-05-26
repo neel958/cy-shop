@@ -11,7 +11,7 @@ void lire_produits() {
 
     for (int i = 0; i < nbrl; i++) {    
         if(fscanf(f, "%s %lu %d %c %f", object[i].nom, &object[i].reference, &object[i].quantite, &object[i].taille, &object[i].prix) != 5){    //lecture des donners du fichier, les stock dans le tableau
-            printf("Erreur de lecture des donnees du fichier <<client.txt>> a la ligne %d\n", i+1);
+            printf("Erreur de lecture des données du fichier <<produit.txt>> a la ligne %d\n", i+1);
         }
     }
     fclose(f);
@@ -28,7 +28,7 @@ void lire_client() {
 
     for (int i = 0; i < nbrl; i++) {
         if (fscanf(f, "%s %s", user[i].nom, user[i].prenom) != 2) {                 //lecture des donners du fichier, les stock dans le tableau
-            printf("Erreur de lecture des donnees du fichier <<client.txt>> a la ligne %d\n", i+1);
+            printf("Erreur de lecture des données du fichier <<client.txt>> à la ligne %d\n", i+1);
 
             fclose(f);
             return;
@@ -143,7 +143,7 @@ void supprimer_ligne_fichier(int numero_ligne) {
     }
 
     int compteur_ligne = 1;
-    char ligne[1000];
+    char ligne[100];
 
     while (fgets(ligne, sizeof(ligne), fichier)){
         if (compteur_ligne != numero_ligne) {

@@ -2,10 +2,10 @@
 
 
 void affiche_produit(produit* p1){
-    printf("Voici les caracteristiques du produit : \n");
+    printf("Voici les caractèristiques du produit : \n");
     printf("Nom : %s \n", p1->nom);
-    printf("Numero de reference : %lu \n", p1->reference);
-    printf("Quantite : %d \n", p1->quantite);
+    printf("Numero de référence : %lu \n", p1->reference);
+    printf("Quantité : %d \n", p1->quantite);
     printf("Prix : %.2f \n", p1->prix);
     printf("Taille : %c \n", p1->taille);
 }
@@ -16,13 +16,13 @@ produit trouver_produit(produit *p1, int nbr_produit){
     produit produit_poubelle;
     produit_poubelle.quantite = -5;
     int choix;
-    printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la reference \nTapez 2 pour le chercher par le nom\n\n");
+    printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la référence \nTapez 2 pour le chercher par le nom\n\n");
     scanf("%d", &choix);
     switch (choix) {
         case 1: {
             int valeur = -1;
             unsigned long ref;
-            printf("Indiquez la reference du produit que vous recherchez : ");
+            printf("Indiquez la référence du produit que vous recherchez : ");
             scanf("%lu", &ref);
             for (int i = 0; i < nbr_produit; i++) {
                 if (p1[i].reference == ref) {  //recherche du produit à travers le tableaux
@@ -31,7 +31,7 @@ produit trouver_produit(produit *p1, int nbr_produit){
                 }
             }
             if (valeur == -1) {
-                printf("Aucun produit n'a ete trouve avec la reference que vous avez entre \n");
+                printf("Aucun produit n'a été trouvé avec la référence que vous avez entré \n");
                 return produit_poubelle;
             }
         }
@@ -48,7 +48,7 @@ produit trouver_produit(produit *p1, int nbr_produit){
                 }
             }
             if (valeur == -1) {
-                printf("Aucun produit n'a ete trouve avec le nom %s \n", nom);
+                printf("Aucun produit n'a été trouvé avec le nom %s \n", nom);
                 return produit_poubelle;
             }
         }
@@ -62,17 +62,17 @@ produit trouver_produit(produit *p1, int nbr_produit){
 
 void recherche_stock_produit(produit *p1, int nbr_produit){
     int choix;
-    printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la reference \nTapez 2 pour le chercher par le nom\n\n");
+    printf("Comment voulez-vous rechercher le produit ?\nTapez 1 pour rechercher le produit par la référence \nTapez 2 pour le chercher par le nom\n\n");
     scanf("%d", &choix);
     switch (choix) {
         case 1: {
             int valeur = -1;
             unsigned long ref;
-            printf("Indiquez la reference du produit dont vous souhaitez connaitre le stock : ");
+            printf("Indiquez la référence du produit dont vous souhaitez connaitre le stock : ");
             scanf("%lu", &ref);
             for (int i = 0; i < nbr_produit; i++) {
                 if (p1[i].reference == ref) {                                                //recherche du produit à travers le tableaux
-                    printf("Il reste la quantite suivante : %d \n", p1[i].quantite);
+                    printf("Il reste la quantité suivante : %d \n", p1[i].quantite);
                     valeur = i;
                     break;
                 }
@@ -89,7 +89,7 @@ void recherche_stock_produit(produit *p1, int nbr_produit){
             scanf("%s", nom);
             for (int i = 0; i < nbr_produit; i++) {
                 if (strcmp(p1[i].nom, nom) == 0) {
-                    printf("Il reste la quantite suivante : %d \n", p1[i].quantite);
+                    printf("Il reste la quantité suivante : %d \n", p1[i].quantite);
                     valeur = i;
                     break;
                 }
@@ -109,7 +109,7 @@ void recherche_stock_produit(produit *p1, int nbr_produit){
 void affiche_stock_bas(produit * p1, int nombre_produit){
     for(int i = 0 ; i < nombre_produit ; i ++){
         if(p1[i].quantite == 0){
-            printf("Nous ne possedons plus de %s \n",p1[i].nom);
+            printf("Nous ne possédons plus de %s \n",p1[i].nom);
         }
     }
     printf("\n \n");
@@ -164,12 +164,12 @@ produit augmenter_stock(produit *p1, int nombre_produits, unsigned long referenc
     }
 
     if (index_produit == -1) {
-        printf("Le produit avec la reference que vous avez rentre n'a pas ete trouve.\n");
+        printf("Le produit avec la référence que vous avez rentré n'a pas été trouvé.\n");
         return p_poubelle;
     }
 
     int quantite_ajoutee;
-    printf("Combien d'unite voulez-vous ajouter pour le produit %s ?\n", p1[index_produit].nom);
+    printf("Combien d'unité voulez-vous ajouter pour le produit %s ?\n", p1[index_produit].nom);
     scanf("%d", &quantite_ajoutee);
 
     int taille_produit = 0;
@@ -190,6 +190,6 @@ produit augmenter_stock(produit *p1, int nombre_produits, unsigned long referenc
 
     p1[index_produit].quantite += quantite_ajoutee;
     ecrire_caracteristiques_produits(object);
-    printf("Le stock pour le produit %s a ete augmenté de %d unite. Nouvelle quantite : %d\n", p1[index_produit].nom, quantite_ajoutee, p1[index_produit].quantite);
+    printf("Le stock pour le produit %s a ete augmenté de %d unité. Nouvelle quantite : %d\n", p1[index_produit].nom, quantite_ajoutee, p1[index_produit].quantite);
     return p1[index_produit];
 }
