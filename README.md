@@ -15,7 +15,8 @@
 ## Lancement
 
   Pour utiliser le programme, ouvrez un terminal dans <code>Projet info</code>
-  Executez la commande <code>make</code> pour compiler puis executer à l'aide de la commande <code>./</code>
+  
+  Executez la commande <code>make</code> pour compiler puis executer à l'aide de la commande <code>./CY-Shop</code>
   
 ## Commandes
 
