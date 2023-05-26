@@ -143,7 +143,8 @@ void affiche_mode_achat(){
             scanf("%s", prenom_supp);
             int client_a_supp = supprimer_client(user, &numero_client ,nom_supp, prenom_supp);
             supprimer_ligne_fichier(client_a_supp);     //supprime le client du fichier (marche que sur linux)
-            lire_client();                              //stock les informations du fichier dans le tableau de client, car la fonction 'supprimer_client' ne supprime ,pas reellement un client, elle decale tout les 
+            lire_client();                              //stock les informations du fichier dans le tableau de client, car la fonction 'supprimer_client' 
+                                                        //ne supprime ,pas reellement un client, elle les decales vers la droite
 
             break;
 
@@ -151,7 +152,6 @@ void affiche_mode_achat(){
         case 7:
             printf("Vous avez paye %.2f euros \n", prix_total);
             prix_total=0;
-            
             break;
         case 8:
         {
