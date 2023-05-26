@@ -19,7 +19,7 @@ void affiche_mode_achat(){
     {
         char nom[50];
         char prenom[50];
-        printf("\nEntrez votre nom, puis votre prénom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prenom. \n");
+        printf("\nEntrez votre nom, puis votre prénom. Attention ne mettez pas d'accent. Et respectez les majuscules en debut de nom/prénom. \n");
         scanf("%s", nom);
         scanf("%s", prenom);
         rechercher_client(user, nom, prenom);
@@ -84,7 +84,7 @@ void affiche_mode_achat(){
                 }
                 char nom[50];
                 char prenom[50];
-                printf("\nEntrez votre nom, puis votre prenom. Attention ne mettez pas d'accent. Et respectez les majuscules en début de nom/prénom. \n");
+                printf("\nEntrez votre nom, puis votre prénom. Attention ne mettez pas d'accent. Et respectez les majuscules en début de nom/prénom. \n");
                 scanf("%s", nom);
                 scanf("%s", prenom);
                 numero_actuelle_client = trouver_position_client(nom, prenom);
@@ -176,13 +176,13 @@ void affiche_mode_achat(){
 
 void afficheModeGestion(){
     int choix = 0;
-    printf("\n \nBienvenue a vous dans le mode gesition \n \n");
+    printf("\n \nBienvenue à vous dans le mode gestion \n \n");
     affiche_stock_bas(object,NOMBRE_MAX_OBJET);
     int place_actuelle = afficher_place_restante(object, NOMBRE_MAX_OBJET);
     do
     {
     printf("\n \nA vous s'offre maintenant plusieurs choix \n");
-    printf("Tappez 1 pour connaître le stock du produit que vous desirez \n");
+    printf("Tappez 1 pour connaître le stock du produit que vous désirez \n");
     printf("Tappez 2 pour augmenter le stock d'un produit que vous désirez \n");
     printf("Tappez 3  pour basculer vers le mode achat \n");
     printf("Tappez 4 pour quitter l'interface \n");

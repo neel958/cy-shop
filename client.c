@@ -49,7 +49,7 @@ int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]
 
 
     if (index_client == -1) {
-        printf("Monsieur %s %s n'a pas été trouvé dans notre base de donnée.\n", nom, prenom);
+        printf("Monsieur %s %s n'a pas été trouvé dans notre base de données.\n", nom, prenom);
         return -1;
     }
 
@@ -59,7 +59,7 @@ int supprimer_client(client * c1, int *nombre_clients, char nom[], char prenom[]
 
     (*nombre_clients)--;                            //decremente la variable nombre_client de 1
 
-    printf("Monsieur %s %s a ete supprimé de la base de donnée avec succès.\n", nom, prenom);
+    printf("Monsieur %s %s a été supprimé de la base de données avec succès.\n", nom, prenom);
     return index_client+1;
 }
 
@@ -109,6 +109,6 @@ int trouver_position_client(char nom[], char prenom[]) {
     }
 
     fclose(fichier);
-    printf("Nous n'avons pas trouvé vos identifiants dans la base de donnée \n");
+    printf("Nous n'avons pas trouvé vos identifiants dans la base de données \n");
     return -1;
 }
