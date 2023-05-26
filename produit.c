@@ -189,6 +189,7 @@ produit augmenter_stock(produit *p1, int nombre_produits, unsigned long referenc
     }
 
     p1[index_produit].quantite += quantite_ajoutee;
-    printf("Le stock pour le produit %s a été augmenté de %d unité(s). Nouvelle quantité : %d\n", p1[index_produit].nom, quantite_ajoutee, p1[index_produit].quantite);
+    ecrire_caracteristiques_produits(object);
+    printf("Le stock pour le produit %s a ete augmenté de %d unite. Nouvelle quantite : %d\n", p1[index_produit].nom, quantite_ajoutee, p1[index_produit].quantite);
     return p1[index_produit];
 }

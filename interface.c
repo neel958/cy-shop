@@ -2,12 +2,12 @@
 
 float prix_total = 0 ;
 int numero_client = 2;
-
+int numero_achat = 0;
 
 void affiche_mode_achat(){
     int numero_actuelle_client = 0;
     int choix, choix1;
-    int numero_achat = 0;
+    
     
     int verif = 0;
    
@@ -97,7 +97,7 @@ void affiche_mode_achat(){
                 break;
             default:
                 affiche_default();
-                return;
+                exit(1);
             }
             
             break;
@@ -149,7 +149,7 @@ void affiche_mode_achat(){
 
         }
         case 7:
-            printf("Vous avez paye %.2f euros \n");
+            printf("Vous avez paye %.2f euros \n", prix_total);
             prix_total=0;
             
             break;
@@ -176,7 +176,7 @@ void affiche_mode_achat(){
 
 void afficheModeGestion(){
     int choix = 0;
-    printf("\n \nBienvenue à vous dans le mode gesition, tout d'abord voici la liste de nos produits avec les stocks les + bas : \n \n ");
+    printf("\n \nBienvenue a vous dans le mode gesition \n \n");
     affiche_stock_bas(object,NOMBRE_MAX_OBJET);
     int place_actuelle = afficher_place_restante(object, NOMBRE_MAX_OBJET);
     do
